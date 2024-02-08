@@ -1,7 +1,7 @@
 import React from "react";
-import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from '../context/LanguageContext';
-import data from '../Data/Data';
+import data from '../Data/data';
+import { useTheme } from "../context/ThemeContext";
 
 
 
@@ -32,7 +32,7 @@ function Header() {
 
   return (
     <>
-    <div className="dark:bg-myDarkC">
+    <div className="container mx-auto bg-header dark:bg-myDarkC">
     <div className="flex justify-end">{switchButton}</div>
     <button onClick={toggleLanguage}>
   {language === 'en' ? "Türkçe'ye geç" : "İngilizce'ye geç"}
@@ -102,6 +102,7 @@ function Header() {
       />
     </div>
     </div>
+    
     </>
   );
 }
