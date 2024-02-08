@@ -100,7 +100,16 @@ function Header() {
         src={require("../images/profile.png")}
         alt="Profil Resmi"
       />
+      
     </div>
+    <div className="relative">
+        <img
+          className="hidden md:block absolute right-0 top-0 transform -translate-y-1/2"
+          src="/svg/Rectangle_18.svg"
+          alt=""
+        />
+       
+      </div>
     </div>
     
     </>
