@@ -41,7 +41,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* İsteğe bağlı olarak, yüklenme metni için ek stil */
 .loading-text {
   color: #3498db;
   font-size: 20px;

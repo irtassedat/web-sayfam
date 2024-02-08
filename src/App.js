@@ -14,37 +14,32 @@ import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { useLanguage } from './context/LanguageContext';
 import { toast } from 'react-toastify';
 
-
-// LoadingAnimation bileşenini import etmek gerekirse
-// import LoadingAnimation from './components/LoadingAnimation';
-
 function App() {
-  // Context'ten gerekli durumları ve fonksiyonları kullan
   const { theme } = useTheme();
   const { language, setCurrentData } = useLanguage();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
-    // API çağrısı örneği, gerçek endpoint ve data yapınıza göre düzenleyin
     axios.post(`https://reqres.in/api/data?lang=${language}`)
       .then((res) => {
-        // Burada setCurrentData ya da benzeri bir fonksiyonla çekilen veriyi duruma kaydedebilirsiniz
-        setLoading(false);
-        // Dil değişikliği toast mesajı
-        toast.success(`${language === 'en' ? 'English' : 'Türkçe'} selected!`);
+        setTimeout(() => {
+          setLoading(false);
+          // Dil değişikliği toast mesajı
+          toast.success(`${language === 'en' ? 'English' : 'Türkçe'} selected!`);
+        }, 2000); 
       })
       .catch((error) => {
         console.error("API request error:", error);
         setLoading(false);
       });
-  }, [language]); // Dil değişikliğinde useEffect tetiklenecek
+  }, [language]);
 
   if (loading) {
     return (
       <div className="flex justify-center items-center flex-col h-screen">
         <div className="loader"></div>
-        <div className="loading-text">Yükleniyor...</div> {/* İsteğe bağlı metin */}
+        <div className="loading-text">Yükleniyor...</div>
       </div>
     );
   }
