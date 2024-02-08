@@ -21,7 +21,7 @@ import { toast } from 'react-toastify';
 function App() {
   // Context'ten gerekli durumları ve fonksiyonları kullan
   const { theme } = useTheme();
-  const { language, setCurrentData } = useLanguage(); // Örnek olarak eklenmiştir, fonksiyonu ve durumu LanguageContext'e göre düzenleyin
+  const { language, setCurrentData } = useLanguage();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -41,7 +41,12 @@ function App() {
   }, [language]); // Dil değişikliğinde useEffect tetiklenecek
 
   if (loading) {
-    return <div>Loading...</div>; // Yükleme göstergesi
+    return (
+      <div className="flex justify-center items-center flex-col h-screen">
+        <div className="loader"></div>
+        <div className="loading-text">Yükleniyor...</div> {/* İsteğe bağlı metin */}
+      </div>
+    );
   }
 
   return (

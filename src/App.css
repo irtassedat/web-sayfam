@@ -36,6 +36,19 @@
   animation: spin 2s linear infinite;
 }
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* İsteğe bağlı olarak, yüklenme metni için ek stil */
+.loading-text {
+  color: #3498db;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+
 .actions-container {
   display: flex;
   justify-content: center; /* İçeriği yatay olarak ortalar */
