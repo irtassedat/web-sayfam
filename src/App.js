@@ -1,22 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Header from "./components/Header";
 import Skills from "./components/Skills";
 import Profile from './components/Profile';
 import Projects from "./components/Projects";
 import Footer from "./components/Footer";
-import { LanguageProvider } from './context/LanguageContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { DataProvider } from './context/DataContext';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
-import { useLanguage } from './context/LanguageContext';
-import { toast } from 'react-toastify';
 
 function App() {
   const { theme } = useTheme();
-  const { language, setCurrentData } = useLanguage();
+  const { language } = useLanguage(); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,9 +23,10 @@ function App() {
       .then((res) => {
         setTimeout(() => {
           setLoading(false);
-          // Dil değişikliği toast mesajı
           toast.success(`${language === 'en' ? 'English' : 'Türkçe'} selected!`);
-        }, 2000); 
+          // setCurrentData ile API'den gelen veriyi duruma kaydetme işlemi yapılabilir
+          // setCurrentData(res.data); 
+        }, 2000);
       })
       .catch((error) => {
         console.error("API request error:", error);
@@ -47,14 +46,16 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <div className={theme === 'dark' ? 'dark-theme' : 'light-theme'}>
-          <Header />
-          <Skills />
-          <Profile />
-          <Projects />
-          <Footer />
-          <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-        </div>
+        <DataProvider>
+          <div className={theme === 'dark' ? 'dark-theme' : 'light-theme'}>
+            <Header />
+            <Skills />
+            <Profile />
+            <Projects />
+            <Footer />
+            <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+          </div>
+        </DataProvider>
       </LanguageProvider>
     </ThemeProvider>
   );
