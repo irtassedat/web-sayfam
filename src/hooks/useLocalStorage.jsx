@@ -3,12 +3,15 @@ import { useState } from "react";
 export default function useLocalStorage(key, defaultValue) {
   const [value, setValue] = useState(() => {
     try {
-      // localStorage'dan değeri al
       const localVal = localStorage.getItem(key);
-      // Eğer değer null ise defaultValue döndür, değilse JSON olarak ayrıştırıp döndür
-      return localVal !== null ? JSON.parse(localVal) : defaultValue;
+      // localStorage'dan alınan değer geçerli bir JSON stringi mi diye kontrol et
+      if (localVal === null || localVal === "undefined") {
+        // Geçerli bir JSON stringi değilse defaultValue kullan
+        return defaultValue;
+      }
+      // Değer null değil ve "undefined" değilse JSON olarak ayrıştır
+      return JSON.parse(localVal);
     } catch (error) {
-      // Ayrıştırma hatası veya başka bir hata oluşursa defaultValue döndür
       console.error("Error reading localStorage key \"" + key + "\": ", error);
       return defaultValue;
     }
@@ -16,11 +19,13 @@ export default function useLocalStorage(key, defaultValue) {
 
   const setLocalStorage = (newValue) => {
     try {
-      // Yeni değeri JSON string olarak localStorage'a kaydet
+      if (newValue === undefined) {
+        console.error("Cannot store 'undefined' value in localStorage");
+        return;
+      }
       localStorage.setItem(key, JSON.stringify(newValue));
       setValue(newValue);
     } catch (error) {
-      // localStorage'a yazma hatası oluşursa logla
       console.error("Error writing localStorage key \"" + key + "\": ", error);
     }
   };

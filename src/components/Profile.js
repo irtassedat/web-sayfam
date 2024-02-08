@@ -1,5 +1,5 @@
 import React from "react";
-import data from '../Data/data'; // data.js dosyasını import et
+import data from '../Data/data.js'; // data.js dosyasını import et
 import { useLanguage } from '../context/LanguageContext'; // useLanguage hook'unu import et
 
 

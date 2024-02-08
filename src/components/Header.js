@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useLanguage } from '../context/LanguageContext';
-import data from '../Data/data';
+import data from '../Data/data.js';
 import { useTheme } from "../context/ThemeContext";
 import MyActions from './MyActions'; // MyActions bileşenini import edin
 
