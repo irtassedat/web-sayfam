@@ -18,7 +18,7 @@ function MyActions() {
   };
 
   return (
-    <div className="actions-container mx-auto py-8 flex justify-between items-center pr-10 bg-slate-100 dark:bg-[_#2A262B]">
+    <div className="actions-container mx-auto py-8 flex justify-between items-center pr-10">
       {/* Tema Değiştirme Butonu ve Dil Değiştirme Butonu */}
       <div className="flex items-center gap-4">
         <button onClick={toggleTheme} className="flex items-center justify-center w-12 h-6 bg-gray-300 rounded-full p-1 cursor-pointer dark:bg-gray-700">

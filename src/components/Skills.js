@@ -1,7 +1,7 @@
 import React from "react";
 import { useLanguage } from '../context/LanguageContext';
-import { SkillsData } from "../Data/SkillsData";
-import data from '../Data/data.js'; // Ensure you have this import for accessing other data if needed
+import { SkillsData } from "../../public/Data/SkillsData";
+import data from '../../public/Data/data'; // Ensure you have this import for accessing other data if needed
 
 function Skills() {
   const { language } = useLanguage(); // Use the custom hook to access current language
