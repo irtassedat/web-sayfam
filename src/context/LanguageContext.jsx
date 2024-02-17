@@ -3,7 +3,7 @@ import axios from 'axios';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.min.css";
-import data from '../Data/data'; // Veri dosyanızın yolu
+import data from '../data/data'; // Veri dosyanızın yolu
 
 export const LanguageContext = createContext();
 
