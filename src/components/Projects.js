@@ -1,5 +1,5 @@
 import React from "react";
-import { ProjectsData } from "../../public/Data/ProjectsData";
+import { ProjectsData } from "../Data/ProjectsData";
 
 function Projects() {
   return (

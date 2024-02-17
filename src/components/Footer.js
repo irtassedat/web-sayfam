@@ -1,6 +1,6 @@
 import React from "react";
 import { useLanguage } from "../context/LanguageContext";
-import data from '../../public/Data/data';
+import data from '../Data/data';
 
 function Footer() {
   const { language } = useLanguage();
