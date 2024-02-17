@@ -11,7 +11,7 @@ export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useLocalStorage('language', 'en');
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isLoading, setIsLoading] = useState(false); // Yükleme durumu için yeni state
-
+  
   useEffect(() => {
     setIsLoading(true); // API çağrısı başlamadan önce yükleme durumunu true olarak ayarla
     const fetchAndSetLanguageData = async () => {
