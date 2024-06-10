@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from "../context/ThemeContext";
+import gifImage from '../images/Shy guy split face loading.gif'; // Gif dosyasını import edin
 
 function MyActions() {
   const { theme, toggleTheme } = useTheme();
@@ -14,6 +15,7 @@ function MyActions() {
   return (
     <div className="actions-container mx-auto py-8 flex justify-between items-center pr-10">
       <div className="flex items-center gap-4">
+        <img src={gifImage} alt="Your Name" className="w-16 h-16" /> {/* Gif dosyasını kullanın */}
         <button onClick={toggleTheme} className="flex items-center justify-center w-12 h-6 bg-gray-300 rounded-full p-1 cursor-pointer dark:bg-gray-700">
           <div className={`w-4 h-4 bg-white rounded-full shadow-md transform ${theme === 'dark' ? 'translate-x-6' : 'translate-x-0'}`}></div>
         </button>
