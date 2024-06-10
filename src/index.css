@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader {
+  @apply border-8 border-t-8 border-gray-200 rounded-full;
+  height: 8rem;
+  width: 8rem;
+  animation: spin 1.5s linear infinite;
+}

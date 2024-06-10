@@ -19,8 +19,8 @@ const data = {
           { label: "Preferred Role", value: "Frontend, Backend" },
         ],
         aboutMe: "About me",
-        introText: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam aut, odit laborum aliquam voluptatum nisi mollitia..",
-        purposeText: "Mnima accusamus ratione soluta aperiam sit voluptate? Dicta quod deserunt quam temporibus cumque magnam! ",
+        introText: "With the advent of the computer age and the increasing importance of data, I have embarked on a developer career alongside my industrial engineering degree.",
+        purposeText: "I am ready to learn and dedicate my time to this journey.. By developing projects using programming languages such as Java, Spring Boot, and JavaScript, I continually progress and enhance my skills. ",
       },
       footer: {
         invitation: "Let’s work together on your next product.",
@@ -52,8 +52,8 @@ const data = {
           { label: "Tercih Edilen Rol", value: "Ön Yüz, Arka Yüz" },
         ],
         aboutMe: "Hakkımda..",
-        introText: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam aut, odit laborum aliquam voluptatum nisi mollitia..",
-        purposeText: "Mnima accusamus ratione soluta aperiam sit voluptate? Dicta quod deserunt quam temporibus cumque magnam! ",
+        introText: "Bilgisayar çağının gelmesi ve verilerin büyük önem kazanmasıyla, endüstri mühendisliği lisansımın yanında geliştiricilik hayatına adım attım.",
+        purposeText: "Öğrenmeye ve bu yolda vakit harcamaya hazırım. Java, Spring Boot ve JavaScript gibi yazılım dillerini kullanarak projeler geliştiriyor ve kendimi sürekli olarak geliştiriyorum !",
       },
       footer: {
         invitation: "Bir sonraki ürününüz üzerinde birlikte çalışalım.",

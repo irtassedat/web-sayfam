@@ -17,7 +17,7 @@ module.exports = {
         darkH:'#2A262B',
         darkS:'#484148',
         darkPi:'#525252',
-        darkPr:'#',
+        darkPr:'',
         switch1:'#E92577',
         darkModeY:'#777777',
         switch2:'#FFE86E'

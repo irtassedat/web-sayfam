@@ -1,0 +1,19 @@
+@keyframes borderChange {
+    0%, 100% {
+      border-radius: 32px;
+    }
+    25% {
+      border-radius: 50%;
+    }
+    50% {
+      border-radius: 10%;
+    }
+    75% {
+      border-radius: 25%;
+    }
+  }
+  
+  .profile-image.animated-border {
+    animation: borderChange 5s infinite;
+  }
+  

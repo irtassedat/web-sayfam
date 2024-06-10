@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
 import './App.css';
 import Header from "./components/Header";
 import Skills from "./components/Skills";
@@ -7,10 +8,10 @@ import Projects from "./components/Projects";
 import Footer from "./components/Footer";
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { DataProvider } from './context/DataContext';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer,} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
+import LoadingAnimation from './components/LoadingAnimation'; // LoadingAnimation bileşenini import ediyoruz
 
 function App() {
   const { theme } = useTheme();
@@ -18,29 +19,20 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    Modal.setAppElement('#root'); // Modal'ın başlatılması
     setLoading(true);
-    axios.post(`https://reqres.in/api/data?lang=${language}`)
-      .then((res) => {
-        setTimeout(() => {
-          setLoading(false);
-          toast.success(`${language === 'en' ? 'English' : 'Türkçe'} selected!`);
-          // setCurrentData ile API'den gelen veriyi duruma kaydetme işlemi yapılabilir
-          // setCurrentData(res.data); 
-        }, 2000);
-      })
-      .catch((error) => {
-        console.error("API request error:", error);
-        setLoading(false);
-      });
+
+    // Burada bekleme süresini belirtiyoruz, örneğin 5 saniye (5000 ms)
+    const loadingTimeout = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
+    // Temizleme işlemi
+    return () => clearTimeout(loadingTimeout);
   }, [language]);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center flex-col h-screen">
-        <div className="loader"></div>
-        <div className="loading-text">Yükleniyor...</div>
-      </div>
-    );
+    return <LoadingAnimation />; // LoadingAnimation bileşenini kullanıyoruz
   }
 
   return (

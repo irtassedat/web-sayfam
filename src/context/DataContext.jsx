@@ -23,7 +23,7 @@ export const DataProvider = ({ children }) => {
                 console.error("Error during POST request:", error);
                 setLoading(false);
             });
-    }, [currentLang]);
+    }, [currentLang, data]);
 
     return (
         <DataContext.Provider value={{ data, loading }}>
