@@ -1,9 +1,9 @@
 import React from 'react';
 import './../index.css'; 
-import { useTheme } from '../context/ThemeContext'; // useTheme'i import edin
+import { useTheme } from '../context/ThemeContext';
 
 const LoadingAnimation = () => {
-    const { theme } = useTheme(); // Tema bilgisini alın
+    const { theme } = useTheme();
 
     return (
         <div className={`loader-container ${theme === 'dark' ? 'bg-gradient-to-r-dark' : 'bg-gradient-to-r-light light-mode'} container mx-auto`}> 

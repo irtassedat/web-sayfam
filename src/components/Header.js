@@ -1,8 +1,8 @@
 import React from "react";
 import { useLanguage } from '../context/LanguageContext';
 import data from '../data/data';
-import MyActions from './MyActions'; // MyActions bileşenini import edin
-import '../styles/Header.css'; // Animasyon için gerekli CSS dosyasını import edin
+import MyActions from './MyActions';
+import '../styles/Header.css';
 
 function Header() {
   const { language } = useLanguage();
@@ -11,7 +11,7 @@ function Header() {
   return (
     <>
       <div className="container mx-auto bg-header dark:bg-myDarkC">
-        <MyActions className="mt-20 pr-10 bg-slate-100 dark:bg-[_#2A262B]" /> {/* MyActions bileşenini ekleyin ve ilgili stil sınıfını uygulayın */}
+        <MyActions className="mt-20 pr-10 bg-slate-100 dark:bg-[_#2A262B]" /> 
         <div className="flex justify-end"></div>
         <div className="flex flex-wrap flex-col-reverse w-full mx-auto gap-10 lg:flex-row lg:flex-nowrap lg:max-w-6xl lg:pt-[151px] lg:pb-[94px] lg:w-9/12">
           <div className="dark:text-white flex flex-col gap-5 mx-auto text-center w-2/3 lg:text-left lg:w-1/2">

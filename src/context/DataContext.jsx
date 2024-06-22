@@ -1,4 +1,3 @@
-// DataContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLanguage } from '../context/LanguageContext';

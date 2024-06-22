@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useLanguage } from '../context/LanguageContext'; // Dil bağlamını kullanmak için ekleyin
+import { useLanguage } from '../context/LanguageContext'; 
 import { ProjectsData } from "../data/ProjectsData";
 import ImageModal from "./ImageModal";
 import laptopScreen from "../images/laptopscreen.png";
@@ -30,7 +30,7 @@ function SamplePrevArrow(props) {
 }
 
 function Projects() {
-  const { language } = useLanguage(); // Mevcut dili almak için ekleyin
+  const { language } = useLanguage(); 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
 

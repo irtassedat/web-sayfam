@@ -24,7 +24,7 @@
   position: relative;
   width: 100%;
   max-width: 120px;
-  height: 140px; /* Loader'ın kapsayacağı alanı genişlettik */
+  height: 140px;
 }
 
 .loader {
@@ -32,8 +32,8 @@
   width: 100%;
   height: auto;
   margin: 0 auto;
-  max-width: 120px; /* Maksimum genişlik ayarlandı */
-  max-height: 90px; /* Maksimum yükseklik ayarlandı */
+  max-width: 120px; 
+  max-height: 90px;
 }
 .loader:before {
   content: "";

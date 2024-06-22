@@ -1,12 +1,11 @@
 import React from "react";
 import { useLanguage } from '../context/LanguageContext';
 import { SkillsData } from "../data/SkillsData";
-import data from '../data/data'; // Ensure you have this import for accessing other data if needed
+import data from '../data/data'; 
 
 function Skills() {
-  const { language } = useLanguage(); // Use the custom hook to access current language
-  const skillsTitle = data[language].skillsTitle; // Access the title based on current language
-
+  const { language } = useLanguage(); 
+  const skillsTitle = data[language].skillsTitle;
   return (
     <div className="container mx-auto flex flex-col pt-20 pb-12 items-center bg-white text-center dark:bg-myDarkG">
       <h1 className="dark:text-white text-4xl mb-12">{skillsTitle}</h1>
@@ -26,7 +25,7 @@ function Skills() {
           );
         })}
       </div>
-      {/* Add SVG images here, ensure the paths are correct based on your public folder structure */}
+      {}
       <img
         src="/svg/Rectangle_22.svg"
         alt=""

@@ -3,7 +3,7 @@ import axios from 'axios';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.min.css";
-import data from '../data/data'; // Veri dosyanızın yolu
+import data from '../data/data';
 
 export const LanguageContext = createContext();
 
@@ -20,7 +20,7 @@ export const LanguageProvider = ({ children }) => {
         console.log('Data fetched successfully:', response.data);
         setIsLoading(false);
         
-        // Sadece ilk yüklemede hoşgeldin mesajı göster
+        
         if (isInitialLoad) {
           toast.success(`Welcome!`, {
             position: "top-right",
@@ -59,7 +59,7 @@ export const LanguageProvider = ({ children }) => {
 
   const toggleLanguage = () => {
     setLanguage(prevLanguage => (prevLanguage === 'en' ? 'tr' : 'en'));
-    // Dil değişikliği sırasında isInitialLoad'u false yapıyoruz
+    
     setIsInitialLoad(false);
   };
 

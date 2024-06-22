@@ -24,7 +24,7 @@ function App() {
 
     const loadingTimeout = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1200);
 
     return () => clearTimeout(loadingTimeout);
   }, [language]);

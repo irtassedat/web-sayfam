@@ -1,4 +1,3 @@
-// SkillsData.js güncellemesi
 export const SkillsData = [
   {
     id: "1",
