@@ -11,7 +11,7 @@ import { DataProvider } from './context/DataContext';
 import { ToastContainer,} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
-import LoadingAnimation from './components/LoadingAnimation'; // LoadingAnimation bileşenini import ediyoruz
+import LoadingAnimation from './components/LoadingAnimation';
 
 function App() {
   const { theme } = useTheme();
@@ -19,20 +19,18 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Modal.setAppElement('#root'); // Modal'ın başlatılması
+    Modal.setAppElement('#root');
     setLoading(true);
 
-    // Burada bekleme süresini belirtiyoruz, örneğin 5 saniye (5000 ms)
     const loadingTimeout = setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 2000);
 
-    // Temizleme işlemi
     return () => clearTimeout(loadingTimeout);
   }, [language]);
 
   if (loading) {
-    return <LoadingAnimation />; // LoadingAnimation bileşenini kullanıyoruz
+    return <LoadingAnimation />;
   }
 
   return (

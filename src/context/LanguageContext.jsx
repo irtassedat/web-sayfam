@@ -19,6 +19,8 @@ export const LanguageProvider = ({ children }) => {
         const response = await axios.post(`https://reqres.in/api/users?lang=${language}`, data[language]);
         console.log('Data fetched successfully:', response.data);
         setIsLoading(false);
+        
+        // Sadece ilk yüklemede hoşgeldin mesajı göster
         if (isInitialLoad) {
           toast.success(`Welcome!`, {
             position: "top-right",
@@ -49,11 +51,16 @@ export const LanguageProvider = ({ children }) => {
       }
     };
 
-    fetchAndSetLanguageData();
-  }, [language, isInitialLoad]);
+    if (isInitialLoad || language) {
+      fetchAndSetLanguageData();
+    }
+
+  }, [language]);
 
   const toggleLanguage = () => {
     setLanguage(prevLanguage => (prevLanguage === 'en' ? 'tr' : 'en'));
+    // Dil değişikliği sırasında isInitialLoad'u false yapıyoruz
+    setIsInitialLoad(false);
   };
 
   return (

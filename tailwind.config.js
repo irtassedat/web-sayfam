@@ -21,7 +21,11 @@ module.exports = {
         switch1:'#E92577',
         darkModeY:'#777777',
         switch2:'#FFE86E'
-      }
+      },
+      backgroundImage: theme => ({
+        'gradient-to-r-dark': 'linear-gradient(to right, #2A262B, #484148)',
+        'gradient-to-r-light': 'linear-gradient(to right, #F4F4F4, #FFFFFF)',
+      }),
     },
     fontSize: {
       sm: "16px",

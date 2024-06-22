@@ -50,13 +50,13 @@
 
 .actions-container {
   display: flex;
-  justify-content: center; /* İçeriği yatay olarak ortalar */
-  align-items: center; /* İçeriği dikey olarak ortalar */
-  position: fixed; /* Bileşeni sabitler */
-  top: 0; /* Üstten sıfır uzaklıkta */
-  right: 30%; /* Sağdan %50 uzaklıkta, ancak bu, tam orta sağa değil */
-  transform: translateX(50%); /* Sağa doğru %50 kaydırarak tam orta sağa alır */
-  z-index: 1000; /* Diğer içeriklerin üzerinde görünmesini sağlar */
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 30%; 
+  transform: translateX(50%);
+  z-index: 1000;
 }
 
 

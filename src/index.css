@@ -2,14 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  color: white;
+}
+
+.bg-gradient-to-r-dark {
+  background-image: linear-gradient(to right, #2A262B, #484148);
+}
+
+.bg-gradient-to-r-light {
+  background-image: linear-gradient(to right, #F4F4F4, #FFFFFF);
+}
+
+.loader-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 120px;
+  height: 140px; /* Loader'ın kapsayacağı alanı genişlettik */
 }
 
 .loader {
-  @apply border-8 border-t-8 border-gray-200 rounded-full;
-  height: 8rem;
-  width: 8rem;
-  animation: spin 1.5s linear infinite;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  max-width: 120px; /* Maksimum genişlik ayarlandı */
+  max-height: 90px; /* Maksimum yükseklik ayarlandı */
 }
+.loader:before {
+  content: "";
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: #FF3D00;
+  animation: loading-bounce 0.5s ease-in-out infinite alternate;
+}
+.loader:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 7px;
+  width: 45px;
+  border-radius: 4px;
+  box-shadow: 0 5px 0 white, -35px 50px 0 white, -70px 95px 0 white;
+  animation: loading-step 1s ease-in-out infinite;
+}
+
+.light-mode .loader:after {
+  box-shadow: 0 5px 0 black, -35px 50px 0 black, -70px 95px 0 black;
+}
+
+@keyframes loading-bounce {
+  0% { transform: scale(1, 0.7) }
+  40% { transform: scale(0.8, 1.2) }
+  60% { transform: scale(1, 1) }
+  100% { bottom: 140px }
+}
+@keyframes loading-step {
+  0% {
+      box-shadow: 0 10px 0 rgba(0,0,0,0),
+                  0 10px 0 white,
+                  -35px 50px 0 white,
+                  -70px 90px 0 white;
+  }
+  100% {
+      box-shadow: 0 10px 0 white,
+                  -35px 50px 0 white,
+                  -70px 90px 0 white,
+                  -70px 90px 0 rgba(0,0,0,0);
+  }
+}
+
+.light-mode .loader:after {
+  box-shadow: 0 10px 0 black,
+              -35px 50px 0 black,
+              -70px 90px 0 black,
+              -70px 90px 0 rgba(0,0,0,0);
+}
+
+.light-mode .text-light-mode {
+  color: black;
+}
+

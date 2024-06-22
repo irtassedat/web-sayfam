@@ -1,11 +1,11 @@
 import React from "react";
-import data from '../data/data'; // data.js dosyasını import et
-import { useLanguage } from '../context/LanguageContext'; // useLanguage hook'unu import et
+import data from '../data/data';
+import { useLanguage } from '../context/LanguageContext';
 
 
 function Profile() {
-    const { language } = useLanguage(); // Aktif dili al
-    const { profile } = data[language]; // Aktif dildeki profile bilgilerini al
+    const { language } = useLanguage();
+    const { profile } = data[language];
   return (
     <div className="container mx-auto dark:bg-myDarkC bg-header pt-[25px] pb-[72px] ">
       <h2 className="dark:text-white text-3xl text-center p-16">{profile.titlee}</h2>
