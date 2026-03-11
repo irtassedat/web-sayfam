@@ -64,9 +64,9 @@ export default function Hero() {
             className="mb-4"
           >
             <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9]">
-              <StaggerText text="Sedat" className="text-primary" charDelay={0.06} />
+              <StaggerText text={t.hero.firstName} className="text-primary" charDelay={0.06} />
               {" "}
-              <StaggerText text="Irtas" className="text-foreground" delay={0.4} charDelay={0.06} />
+              <StaggerText text={t.hero.lastName} className="text-foreground" delay={0.4} charDelay={0.06} />
             </h1>
           </motion.div>
 

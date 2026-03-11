@@ -14,7 +14,7 @@ export default function Footer() {
             <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <span className="text-white font-bold text-[8px]">SI</span>
             </div>
-            <span className="text-xs text-muted">&copy; 2025 Sedat Irtas. Tum haklari saklidir.</span>
+            <span className="text-xs text-muted">{t.footer.copyright}</span>
           </div>
           <div className="flex items-center gap-5">
             <a href="mailto:sedatirtas.1@gmail.com" className="text-xs text-muted/50 hover:text-primary transition-colors">sedatirtas.1@gmail.com</a>

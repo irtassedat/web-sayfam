@@ -27,7 +27,7 @@ const socialData = [
 
 const descKeys = ["github", "linkedin", "email"] as const;
 
-function ContactCard({ link, desc, index }: { link: typeof socialData[0]; desc: string; index: number }) {
+function ContactCard({ link, desc, socialLabel, index }: { link: typeof socialData[0]; desc: string; socialLabel: string; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -52,7 +52,7 @@ function ContactCard({ link, desc, index }: { link: typeof socialData[0]; desc: 
           <div className="w-14 h-14 mx-auto mb-4 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: link.color + "10", color: link.color }}>
             {link.icon}
           </div>
-          <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors capitalize">{link.key === "email" ? "E-posta" : link.key === "linkedin" ? "LinkedIn" : "GitHub"}</h3>
+          <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors">{socialLabel}</h3>
           <p className="text-[11px] text-muted">{desc}</p>
         </div>
       </div>
@@ -79,7 +79,7 @@ export default function Contact() {
 
         <div className="grid sm:grid-cols-3 gap-4">
           {socialData.map((link, i) => (
-            <ContactCard key={link.key} link={link} desc={descs[i]} index={i} />
+            <ContactCard key={link.key} link={link} desc={descs[i]} socialLabel={t.contact.socialLabels[link.key as keyof typeof t.contact.socialLabels]} index={i} />
           ))}
         </div>
 
