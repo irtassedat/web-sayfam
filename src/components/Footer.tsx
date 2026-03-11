@@ -1,22 +1,61 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function Footer() {
   return (
-    <footer className="py-8 px-4 border-t border-border">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <div className="w-5 h-5 rounded bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <span className="text-white font-bold text-[8px]">SI</span>
+    <footer className="relative py-10 px-4 border-t border-border">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+              <span className="text-white font-bold text-[8px]">SI</span>
+            </div>
+            <span className="text-xs text-muted">Sedat Irtas</span>
+            <span className="text-[10px] text-muted/30 font-mono">2025</span>
           </div>
-          <span className="text-xs text-muted">Sedat Irtas</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <a href="https://github.com/irtassedat" target="_blank" rel="noopener noreferrer" className="text-xs text-muted hover:text-primary transition-colors">
-            GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/sedat-irta%C5%9F-04a441137/" target="_blank" rel="noopener noreferrer" className="text-xs text-muted hover:text-primary transition-colors">
-            LinkedIn
-          </a>
-          <span className="text-xs text-muted/40">2025</span>
-        </div>
+
+          <div className="flex items-center gap-5">
+            <a
+              href="https://github.com/irtassedat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-muted/50 hover:text-primary transition-colors"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/sedat-irta%C5%9F-04a441137/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-muted/50 hover:text-primary transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="mailto:irtassedat@gmail.com"
+              className="text-xs text-muted/50 hover:text-primary transition-colors"
+            >
+              E-posta
+            </a>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-6 text-center"
+        >
+          <p className="text-[10px] text-muted/25 font-mono">
+            Next.js + Tailwind CSS + Framer Motion ile tasarlandi
+          </p>
+        </motion.div>
       </div>
     </footer>
   );
