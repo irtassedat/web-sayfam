@@ -16,14 +16,6 @@ interface ProjectBase {
 }
 
 const projectBases: ProjectBase[] = [
-  { tags: ["TypeScript", "Claude AI", "MCP", "Swarm Intelligence", "Vector DB"], category: ["ai"], color: "#a855f7", featured: true },
-  { tags: ["Python", "WebSocket", "Redis", "PostgreSQL", "Docker"], category: ["data"], color: "#6366f1", featured: true },
-  { tags: ["Python", "Pattern Matching", "ML", "FastAPI", "MongoDB"], category: ["data", "ai"], color: "#8b5cf6" },
-  { tags: ["TypeScript", "REST API", "Puppeteer", "Playwright", "Docker"], category: ["data"], color: "#10b981" },
-  { tags: ["React", "Node.js", "Supabase", "Telegram Bot", "Docker", "Nginx"], category: ["platform", "bot"], color: "#14b8a6" },
-  { tags: ["Node.js", "Telegram API", "Cron", "MongoDB", "Docker"], category: ["bot"], color: "#06b6d4" },
-  { tags: ["Python", "Flask", "Telegram API", "Docker Compose", "Streamlit"], category: ["bot"], color: "#ec4899" },
-  { tags: ["Python", "Node.js", "SEO", "Puppeteer", "Analytics"], category: ["data", "ai"], color: "#84cc16" },
   {
     tags: ["React", "Node.js", "Express", "PostgreSQL", "JWT"],
     category: ["platform"],
@@ -38,6 +30,14 @@ const projectBases: ProjectBase[] = [
     github: ["https://github.com/irtassedat/ecommerce", "https://github.com/irtassedat/ecommerce-backendAPI"],
     featured: true,
   },
+  { tags: ["TypeScript", "Claude AI", "MCP", "Swarm Intelligence", "Vector DB"], category: ["ai"], color: "#a855f7", featured: true },
+  { tags: ["Python", "WebSocket", "Redis", "PostgreSQL", "Docker"], category: ["data"], color: "#6366f1", featured: true },
+  { tags: ["Python", "Pattern Matching", "ML", "FastAPI", "MongoDB"], category: ["data", "ai"], color: "#8b5cf6" },
+  { tags: ["TypeScript", "REST API", "Puppeteer", "Playwright", "Docker"], category: ["data"], color: "#10b981" },
+  { tags: ["React", "Node.js", "Supabase", "Telegram Bot", "Docker", "Nginx"], category: ["platform", "bot"], color: "#14b8a6" },
+  { tags: ["Node.js", "Telegram API", "Cron", "MongoDB", "Docker"], category: ["bot"], color: "#06b6d4" },
+  { tags: ["Python", "Flask", "Telegram API", "Docker Compose", "Streamlit"], category: ["bot"], color: "#ec4899" },
+  { tags: ["Python", "Node.js", "SEO", "Puppeteer", "Analytics"], category: ["data", "ai"], color: "#84cc16" },
 ];
 
 function ProjectCard({

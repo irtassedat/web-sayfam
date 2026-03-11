@@ -62,6 +62,18 @@ const dict = {
       ],
       items: [
         {
+          title: "QR Menu Yonetim Sistemi",
+          desc: "Restoran ve kafeler icin end-to-end dijital menu, siparis yonetimi ve admin paneli.",
+          longDesc: "End-to-end restoran yonetim sistemi. React tabanli responsive frontend, Node.js/Express backend, PostgreSQL veritabani. QR kod ile menu erisimi, kategori filtreleme, urun yonetimi, kullanici yetkilendirme, siparis takibi ve admin paneli.",
+          metrics: "Full-Stack",
+        },
+        {
+          title: "E-Ticaret Platformu",
+          desc: "React frontend + Spring Boot backend ile tam kapsamli e-ticaret uygulamasi.",
+          longDesc: "Urun katalog, arama/filtreleme, sepet yonetimi, odeme entegrasyonu, kullanici kayit/giris, siparis takibi. Backend: JPA/Hibernate, Spring Security, RESTful API. Frontend: Redux state management, responsive tasarim.",
+          metrics: "React + Spring",
+        },
+        {
           title: "AI Ajan Orkestrasyon Sistemi",
           desc: "60+ uzman ajanin koordineli calismasini saglayan enterprise orkestrasyon platformu. Self-learning, fault-tolerant consensus ve vector memory ile donatilmis.",
           longDesc: "Enterprise AI ajan orkestrasyon sistemi. Self-learning yetenegi, fault-tolerant consensus mekanizmasi, vector memory ve MCP (Model Context Protocol) entegrasyonu. Swarm intelligence ile coklu ajan koordinasyonu saglar. TypeScript tabanli CLI araci, plugin mimarisi, dagitik gorev yonetimi. Her ajan kendi uzmanlik alaninda otonom calisirken, koordinasyon katmani tum sistemin tutarli kalmasini garantiler.",
@@ -108,18 +120,6 @@ const dict = {
           desc: "Programatik icerik uretimi, anahtar kelime izleme, rakip analizi ve teknik SEO otomasyon araci.",
           longDesc: "Hedef anahtar kelimelerde siralama takibi, rakip analizi, programatik icerik sablonlari ile toplu sayfa olusturma, teknik SEO denetim araci. Rekabetci Turkce anahtar kelimelerde #1 siralama basarisi. Otomatik raporlama ve trend analizi.",
           metrics: "#1 Siralama",
-        },
-        {
-          title: "QR Menu Yonetim Sistemi",
-          desc: "Restoran ve kafeler icin end-to-end dijital menu, siparis yonetimi ve admin paneli.",
-          longDesc: "End-to-end restoran yonetim sistemi. React tabanli responsive frontend, Node.js/Express backend, PostgreSQL veritabani. QR kod ile menu erisimi, kategori filtreleme, urun yonetimi, kullanici yetkilendirme, siparis takibi ve admin paneli.",
-          metrics: "Full-Stack",
-        },
-        {
-          title: "E-Ticaret Platformu",
-          desc: "React frontend + Spring Boot backend ile tam kapsamli e-ticaret uygulamasi.",
-          longDesc: "Urun katalog, arama/filtreleme, sepet yonetimi, odeme entegrasyonu, kullanici kayit/giris, siparis takibi. Backend: JPA/Hibernate, Spring Security, RESTful API. Frontend: Redux state management, responsive tasarim.",
-          metrics: "React + Spring",
         },
       ],
       expandHint: "Detaylar ve kaynak kodu",
@@ -217,6 +217,18 @@ const dict = {
       ],
       items: [
         {
+          title: "QR Menu Management System",
+          desc: "End-to-end digital menu, order management, and admin panel for restaurants and cafes.",
+          longDesc: "End-to-end restaurant management system. React-based responsive frontend, Node.js/Express backend, PostgreSQL database. QR code menu access, category filtering, product management, user authentication, order tracking, and admin panel.",
+          metrics: "Full-Stack",
+        },
+        {
+          title: "E-Commerce Platform",
+          desc: "Full-scope e-commerce application with React frontend and Spring Boot backend.",
+          longDesc: "Product catalog, search/filtering, cart management, payment integration, user registration/login, order tracking. Backend: JPA/Hibernate, Spring Security, RESTful API. Frontend: Redux state management, responsive design.",
+          metrics: "React + Spring",
+        },
+        {
           title: "AI Agent Orchestration System",
           desc: "Enterprise orchestration platform coordinating 60+ specialized agents. Self-learning, fault-tolerant consensus, and vector memory.",
           longDesc: "Enterprise AI agent orchestration system. Self-learning capability, fault-tolerant consensus mechanism, vector memory and MCP (Model Context Protocol) integration. Multi-agent coordination through swarm intelligence. TypeScript-based CLI tool, plugin architecture, distributed task management.",
@@ -263,18 +275,6 @@ const dict = {
           desc: "Programmatic content generation, keyword monitoring, competitor analysis, and technical SEO automation tool.",
           longDesc: "Keyword rank tracking, competitor analysis, bulk page creation with programmatic content templates, technical SEO audit tool. Achieved #1 ranking for competitive Turkish keywords. Automated reporting and trend analysis.",
           metrics: "#1 Ranking",
-        },
-        {
-          title: "QR Menu Management System",
-          desc: "End-to-end digital menu, order management, and admin panel for restaurants and cafes.",
-          longDesc: "End-to-end restaurant management system. React-based responsive frontend, Node.js/Express backend, PostgreSQL database. QR code menu access, category filtering, product management, user authentication, order tracking, and admin panel.",
-          metrics: "Full-Stack",
-        },
-        {
-          title: "E-Commerce Platform",
-          desc: "Full-scope e-commerce application with React frontend and Spring Boot backend.",
-          longDesc: "Product catalog, search/filtering, cart management, payment integration, user registration/login, order tracking. Backend: JPA/Hibernate, Spring Security, RESTful API. Frontend: Redux state management, responsive design.",
-          metrics: "React + Spring",
         },
       ],
       expandHint: "Details & source code",
@@ -372,6 +372,18 @@ const dict = {
       ],
       items: [
         {
+          title: "Sistema Gestione Menu QR",
+          desc: "Menu digitale end-to-end, gestione ordini e pannello admin per ristoranti e bar.",
+          longDesc: "Sistema di gestione ristorante end-to-end. Frontend responsive React, backend Node.js/Express, database PostgreSQL. Accesso menu tramite codice QR, filtro categorie, gestione prodotti, autenticazione utente, tracking ordini e pannello admin.",
+          metrics: "Full-Stack",
+        },
+        {
+          title: "Piattaforma E-Commerce",
+          desc: "Applicazione e-commerce completa con frontend React e backend Spring Boot.",
+          longDesc: "Catalogo prodotti, ricerca/filtro, gestione carrello, integrazione pagamenti, registrazione/login utente, tracking ordini. Backend: JPA/Hibernate, Spring Security, API RESTful. Frontend: Redux state management, design responsive.",
+          metrics: "React + Spring",
+        },
+        {
           title: "Sistema Orchestrazione Agenti AI",
           desc: "Piattaforma enterprise di orchestrazione che coordina 60+ agenti specializzati. Self-learning, consenso fault-tolerant e memoria vettoriale.",
           longDesc: "Sistema di orchestrazione AI enterprise. Capacita di self-learning, meccanismo di consenso fault-tolerant, memoria vettoriale e integrazione MCP. Coordinamento multi-agente tramite swarm intelligence. CLI TypeScript, architettura plugin, gestione distribuita dei task.",
@@ -418,18 +430,6 @@ const dict = {
           desc: "Generazione contenuti programmatica, monitoraggio keyword, analisi competitor e strumento automazione SEO tecnica.",
           longDesc: "Monitoraggio ranking keyword, analisi competitor, creazione pagine in blocco con template contenuti programmatici, strumento audit SEO tecnico. Raggiunto #1 ranking per keyword competitive turche.",
           metrics: "#1 Ranking",
-        },
-        {
-          title: "Sistema Gestione Menu QR",
-          desc: "Menu digitale end-to-end, gestione ordini e pannello admin per ristoranti e bar.",
-          longDesc: "Sistema di gestione ristorante end-to-end. Frontend responsive React, backend Node.js/Express, database PostgreSQL. Accesso menu tramite codice QR, filtro categorie, gestione prodotti, autenticazione utente, tracking ordini e pannello admin.",
-          metrics: "Full-Stack",
-        },
-        {
-          title: "Piattaforma E-Commerce",
-          desc: "Applicazione e-commerce completa con frontend React e backend Spring Boot.",
-          longDesc: "Catalogo prodotti, ricerca/filtro, gestione carrello, integrazione pagamenti, registrazione/login utente, tracking ordini. Backend: JPA/Hibernate, Spring Security, API RESTful. Frontend: Redux state management, design responsive.",
-          metrics: "React + Spring",
         },
       ],
       expandHint: "Dettagli e codice sorgente",
