@@ -14,13 +14,12 @@ export default function Footer() {
             <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <span className="text-white font-bold text-[8px]">SI</span>
             </div>
-            <span className="text-xs text-muted">Sedat Irtas</span>
-            <span className="text-[10px] text-muted/30 font-mono">2025</span>
+            <span className="text-xs text-muted">&copy; 2025 Sedat Irtas. Tum haklari saklidir.</span>
           </div>
           <div className="flex items-center gap-5">
+            <a href="mailto:sedatirtas.1@gmail.com" className="text-xs text-muted/50 hover:text-primary transition-colors">sedatirtas.1@gmail.com</a>
             <a href="https://github.com/irtassedat" target="_blank" rel="noopener noreferrer" className="text-xs text-muted/50 hover:text-primary transition-colors">GitHub</a>
             <a href="https://www.linkedin.com/in/sedat-irta%C5%9F-04a441137/" target="_blank" rel="noopener noreferrer" className="text-xs text-muted/50 hover:text-primary transition-colors">LinkedIn</a>
-            <a href="mailto:irtassedat@gmail.com" className="text-xs text-muted/50 hover:text-primary transition-colors">E-posta</a>
           </div>
         </motion.div>
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-6 text-center">

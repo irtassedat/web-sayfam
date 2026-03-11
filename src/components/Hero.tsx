@@ -65,7 +65,7 @@ export default function Hero() {
           >
             <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9]">
               <StaggerText text="Sedat" className="text-gradient-animate" charDelay={0.06} />
-              <br />
+              {" "}
               <StaggerText text="Irtas" className="text-foreground" delay={0.4} charDelay={0.06} />
             </h1>
           </motion.div>
