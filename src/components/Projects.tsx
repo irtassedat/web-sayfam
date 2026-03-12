@@ -36,6 +36,7 @@ const projectBases: ProjectBase[] = [
     color: "#0ea5e9",
     github: ["https://github.com/irtassedat/turkerler-portfolio"],
   },
+  { tags: ["Python", "Node.js", "Yandex SEO", "Nginx", "Cloudflare", "Analytics"], category: ["data", "ai"], color: "#84cc16" },
   { tags: ["TypeScript", "Claude AI", "MCP", "Swarm Intelligence", "Vector DB"], category: ["ai"], color: "#a855f7", featured: true },
   { tags: ["Python", "WebSocket", "Redis", "PostgreSQL", "Docker"], category: ["data"], color: "#6366f1", featured: true },
   { tags: ["Python", "Pattern Matching", "ML", "FastAPI", "MongoDB"], category: ["data", "ai"], color: "#8b5cf6" },
@@ -43,7 +44,6 @@ const projectBases: ProjectBase[] = [
   { tags: ["React", "Node.js", "PostgreSQL", "Redis", "Docker Compose", "Nginx"], category: ["platform", "bot"], color: "#14b8a6" },
   { tags: ["Node.js", "Telegram API", "Cron", "MongoDB", "Docker"], category: ["bot"], color: "#06b6d4" },
   { tags: ["Python", "FastAPI", "Telethon", "Docker Compose", "APScheduler", "SQLite"], category: ["bot", "data", "ai"], color: "#ec4899", featured: true },
-  { tags: ["Python", "Node.js", "Yandex SEO", "Nginx", "Cloudflare", "Analytics"], category: ["data", "ai"], color: "#84cc16" },
 ];
 
 function ProjectCard({

@@ -82,6 +82,12 @@ const dict = {
           metrics: "Next.js 16",
         },
         {
+          title: "SEO Otomasyon & Arama Motoru Optimizasyonu",
+          desc: "Coğrafi kısıtlamalı pazarda Yandex arama motorunda #1 sıralama. Programatik içerik üretimi ve teknik SEO.",
+          longDesc: "Yandex arama motorunda rekabetçi Türkçe anahtar kelimelerde #1 organik sıralama başarısı — coğrafi kısıtlamalara rağmen. Nginx + Cloudflare reverse proxy altyapısı, Yandex Webmaster doğrulaması, programatik içerik şablonları ile ölçeklenebilir sayfa üretimi. VPS üzerinde Docker deployment, SSL/TLS sertifika yönetimi, Tailscale mesh VPN ile güvenli uzaktan yönetim. Otomatik raporlama ve sıralama trend analizi.",
+          metrics: "#1 Yandex",
+        },
+        {
           title: "AI Ajan Orkestrasyon Sistemi",
           desc: "60+ uzman ajanın koordineli çalışmasını sağlayan enterprise orkestrasyon platformu. Self-learning, fault-tolerant consensus ve vector memory ile donatılmış.",
           longDesc: "Enterprise AI ajan orkestrasyon sistemi. Self-learning yeteneği, fault-tolerant consensus mekanizması, vector memory ve MCP (Model Context Protocol) entegrasyonu. Swarm intelligence ile çoklu ajan koordinasyonu sağlar. TypeScript tabanlı CLI aracı, plugin mimarisi, dağıtık görev yönetimi. Her ajan kendi uzmanlık alanında otonom çalışırken, koordinasyon katmanı tüm sistemin tutarlı kalmasını garantiler.",
@@ -122,12 +128,6 @@ const dict = {
           desc: "12K+ satır Python, 4 Docker microservice, FastAPI admin dashboard, adaptif ML skorlama ve içerik zekası motoru.",
           longDesc: "Microservice mimaride 4 Docker container'dan oluşan platform: (1) FastAPI admin dashboard - RBAC, gerçek zamanlı SSE event streaming, 10+ route modülü; (2) İçerik otomasyon motoru - APScheduler ile marka bazlı cron yönetimi, 5 içerik tipi rotasyonu, A/B test altyapısı, emoji varyasyon üretimi; (3) Üye kalite analizi - Telethon tabanlı, adaptif keyword-weighted ML skorlama, saatlik strateji optimizasyonu, otomatik grup keşfi; (4) Doğrulama sistemi. Multi-brand SaaS mimarisi, SQLite WAL mode, lineer regresyon büyüme tahminleri, audit logging. Dakikada otomatik health check ve self-healing container yönetimi.",
           metrics: "12K+ Satır",
-        },
-        {
-          title: "SEO Otomasyon & Arama Motoru Optimizasyonu",
-          desc: "Coğrafi kısıtlamalı pazarda Yandex arama motorunda #1 sıralama. Programatik içerik üretimi ve teknik SEO.",
-          longDesc: "Yandex arama motorunda rekabetçi Türkçe anahtar kelimelerde #1 organik sıralama başarısı — coğrafi kısıtlamalara rağmen. Nginx + Cloudflare reverse proxy altyapısı, Yandex Webmaster doğrulaması, programatik içerik şablonları ile ölçeklenebilir sayfa üretimi. VPS üzerinde Docker deployment, SSL/TLS sertifika yönetimi, Tailscale mesh VPN ile güvenli uzaktan yönetim. Otomatik raporlama ve sıralama trend analizi.",
-          metrics: "#1 Yandex",
         },
       ],
       expandHint: "Detaylar ve kaynak kodu",
@@ -249,6 +249,12 @@ const dict = {
           metrics: "Next.js 16",
         },
         {
+          title: "SEO Automation & Search Engine Optimization",
+          desc: "Achieved #1 Yandex ranking in geo-restricted market. Programmatic content generation and technical SEO.",
+          longDesc: "#1 organic ranking on Yandex for competitive Turkish keywords — despite geographic restrictions. Nginx + Cloudflare reverse proxy infrastructure, Yandex Webmaster verification, programmatic content templates for scalable page generation. VPS Docker deployment, SSL/TLS certificate management, Tailscale mesh VPN for secure remote management. Automated reporting and ranking trend analysis.",
+          metrics: "#1 Yandex",
+        },
+        {
           title: "AI Agent Orchestration System",
           desc: "Enterprise orchestration platform coordinating 60+ specialized agents. Self-learning, fault-tolerant consensus, and vector memory.",
           longDesc: "Enterprise AI agent orchestration system. Self-learning capability, fault-tolerant consensus mechanism, vector memory and MCP (Model Context Protocol) integration. Multi-agent coordination through swarm intelligence. TypeScript-based CLI tool, plugin architecture, distributed task management.",
@@ -289,12 +295,6 @@ const dict = {
           desc: "12K+ lines Python, 4 Docker microservices, FastAPI admin dashboard, adaptive ML scoring, and content intelligence engine.",
           longDesc: "Microservice platform with 4 Docker containers: (1) FastAPI admin dashboard — RBAC, real-time SSE event streaming, 10+ route modules; (2) Content automation engine — APScheduler per-brand cron management, 5 content type rotation, A/B testing, emoji variation generation; (3) Member quality analysis — Telethon-based adaptive keyword-weighted ML scoring, hourly strategy optimization, automated group discovery; (4) Verification system. Multi-brand SaaS architecture, SQLite WAL mode, linear regression growth predictions, audit logging. Auto health checks with self-healing container management.",
           metrics: "12K+ Lines",
-        },
-        {
-          title: "SEO Automation & Search Engine Optimization",
-          desc: "Achieved #1 Yandex ranking in geo-restricted market. Programmatic content generation and technical SEO.",
-          longDesc: "#1 organic ranking on Yandex for competitive Turkish keywords — despite geographic restrictions. Nginx + Cloudflare reverse proxy infrastructure, Yandex Webmaster verification, programmatic content templates for scalable page generation. VPS Docker deployment, SSL/TLS certificate management, Tailscale mesh VPN for secure remote management. Automated reporting and ranking trend analysis.",
-          metrics: "#1 Yandex",
         },
       ],
       expandHint: "Details & source code",
@@ -416,6 +416,12 @@ const dict = {
           metrics: "Next.js 16",
         },
         {
+          title: "Automazione SEO & Ottimizzazione Motori Ricerca",
+          desc: "#1 ranking Yandex in mercato geo-ristretto. Generazione contenuti programmatica e SEO tecnico.",
+          longDesc: "#1 ranking organico Yandex per keyword competitive turche nonostante restrizioni geografiche. Infrastruttura Nginx + Cloudflare, verifica Yandex Webmaster, template contenuti programmatici. Deploy Docker su VPS, gestione certificati SSL/TLS, Tailscale mesh VPN. Reporting automatico e analisi trend ranking.",
+          metrics: "#1 Yandex",
+        },
+        {
           title: "Sistema Orchestrazione Agenti AI",
           desc: "Piattaforma enterprise che coordina 60+ agenti specializzati. Self-learning, consenso fault-tolerant e memoria vettoriale.",
           longDesc: "Sistema orchestrazione AI enterprise. Self-learning, consenso fault-tolerant, memoria vettoriale e integrazione MCP. Coordinamento multi-agente tramite swarm intelligence. CLI TypeScript, architettura plugin, gestione distribuita task.",
@@ -456,12 +462,6 @@ const dict = {
           desc: "12K+ righe Python, 4 microservizi Docker, dashboard FastAPI, scoring ML adattivo e motore content intelligence.",
           longDesc: "Piattaforma microservizi con 4 container Docker: (1) Dashboard admin FastAPI con RBAC, SSE real-time, 10+ moduli route; (2) Motore automazione contenuti con APScheduler, rotazione 5 tipi, A/B testing; (3) Analisi qualita membri con scoring ML adattivo Telethon; (4) Sistema verifica. Architettura SaaS multi-brand, SQLite WAL, previsioni crescita, audit logging. Health check automatici con self-healing.",
           metrics: "12K+ Righe",
-        },
-        {
-          title: "Automazione SEO & Ottimizzazione Motori Ricerca",
-          desc: "#1 ranking Yandex in mercato geo-ristretto. Generazione contenuti programmatica e SEO tecnico.",
-          longDesc: "#1 ranking organico Yandex per keyword competitive turche nonostante restrizioni geografiche. Infrastruttura Nginx + Cloudflare, verifica Yandex Webmaster, template contenuti programmatici. Deploy Docker su VPS, gestione certificati SSL/TLS, Tailscale mesh VPN. Reporting automatico e analisi trend ranking.",
-          metrics: "#1 Yandex",
         },
       ],
       expandHint: "Dettagli e codice sorgente",
