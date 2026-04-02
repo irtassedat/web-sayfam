@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sedat Irtas - Portfolio
+
+Personal portfolio website showcasing full-stack development and AI systems engineering projects. Built with **Next.js 16**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**.
+
+> **Live:** [sedatirtas.vercel.app](https://sedatirtas.vercel.app)
+
+---
+
+## Sections
+
+- **Hero** - Introduction with animated text reveal
+- **About** - Background in industrial engineering + software development
+- **Projects** - 12+ production projects including:
+  - QR Menu Management System ([Frontend](https://github.com/irtassedat/qrmenu-frontend) / [Backend](https://github.com/irtassedat/qrmenu-backend))
+  - AI Agent Orchestration System (60+ agents)
+  - Real-time Data Processing Platform (10K+ data points/min)
+  - E-commerce Platform
+  - Pattern Recognition & Risk Engine
+  - Multi-source API Aggregation Platform
+  - SEO Automation tools
+- **Technologies** - Frontend, backend, data infrastructure, AI/automation skills
+- **Contact** - GitHub, LinkedIn, email
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **Framework** | Next.js 16 |
+| **Language** | TypeScript |
+| **Styling** | Tailwind CSS |
+| **Animations** | Framer Motion |
+| **Deployment** | Vercel |
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── layout.tsx       # Root layout with metadata
+│   └── page.tsx         # Main page
+├── components/
+│   ├── Hero.tsx         # Animated hero section
+│   ├── About.tsx        # About section
+│   ├── Projects.tsx     # Project showcase
+│   ├── TechStack.tsx    # Technologies grid
+│   ├── Contact.tsx      # Contact info
+│   ├── TextReveal.tsx   # Text animation component
+│   ├── Navbar.tsx       # Navigation
+│   └── Footer.tsx       # Footer
+└── lib/                 # Utilities
+```
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+git clone https://github.com/irtassedat/web-sayfam.git
+cd web-sayfam
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Related Projects
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [QR Menu Frontend](https://github.com/irtassedat/qrmenu-frontend) - Restaurant management system
+- [QR Menu Backend](https://github.com/irtassedat/qrmenu-backend) - REST API for QR menu
+- [Turkerler Portfolio](https://github.com/irtassedat/turkerler-portfolio) - Energy management portfolio
