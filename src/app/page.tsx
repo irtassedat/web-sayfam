@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import { useLang } from "@/lib/i18n";
 
 function useTypingEffect(text: string, speed = 40, delay = 0) {
   const [displayed, setDisplayed] = useState("");
@@ -58,53 +59,87 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-function ProjectCard({ title, description, metrics, tags, github, live, color, delay }: {
+function ProjectCard({ title, description, metrics, tags, github, live, color, delay, preview }: {
   title: string; description: string; metrics: string; tags: string[];
-  github?: string; live?: string; color: string; delay: number;
+  github?: string; live?: string; color: string; delay: number; preview?: string;
 }) {
-  const handleClick = () => {
+  const handleCardClick = () => {
     if (live?.includes("sebastianlogic")) {
       window.open(live, "_blank", "width=420,height=880,menubar=no,toolbar=no,location=no,status=no");
     } else if (live) {
       window.open(live, "_blank");
-    } else if (github) {
-      window.open(github, "_blank");
     } else {
       window.open("https://github.com/irtassedat", "_blank");
     }
   };
 
+  const handleSourceClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    window.open(github || "https://github.com/irtassedat", "_blank");
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay, duration: 0.5 }}
-      onClick={handleClick}
-      className="card-glow rounded-2xl p-6 group cursor-pointer"
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ delay, duration: 0.5, ease: "easeOut" }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      onClick={handleCardClick}
+      className="card-glow rounded-2xl p-6 group cursor-pointer relative overflow-hidden"
     >
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-3 flex-wrap">
-          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 12px ${color}50` }} />
-          <h3 className="font-semibold">{title}</h3>
+      {preview && (
+        <div className="absolute -bottom-2 -right-2 w-[80px] opacity-[0.12] group-hover:opacity-25 transition-opacity duration-500 pointer-events-none">
+          <div className="rounded-[0.5rem] border border-foreground/10 overflow-hidden">
+            <img src={preview} alt="" className="w-full" />
+          </div>
+        </div>
+      )}
+      <div className="relative z-10">
+        <div className="flex items-start justify-between mb-3">
+          <div className="flex items-center gap-3 flex-wrap">
+            <motion.div
+              className="w-2 h-2 rounded-full"
+              style={{ backgroundColor: color, boxShadow: `0 0 12px ${color}50` }}
+              animate={{ scale: [1, 1.3, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <h3 className="font-semibold">{title}</h3>
+            {live && (
+              <span className="flex items-center gap-1 text-[9px] px-2 py-0.5 rounded-full bg-green/10 text-green border border-green/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />Live
+              </span>
+            )}
+          </div>
+          <span className="text-xs px-3 py-1 rounded-full font-mono shrink-0" style={{ backgroundColor: color + "15", color }}>{metrics}</span>
+        </div>
+        <p className="text-sm text-muted leading-relaxed mb-4">{description}</p>
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {tags.map(t => (
+            <motion.span
+              key={t}
+              whileHover={{ scale: 1.05, borderColor: color + "40" }}
+              className="text-[10px] px-2 py-0.5 rounded-full bg-surface-light text-muted/70 border border-border/30 transition-colors"
+            >
+              {t}
+            </motion.span>
+          ))}
+        </div>
+        <div className="flex items-center gap-3">
+          {github && (
+            <button onClick={handleSourceClick} className="text-xs text-muted hover:text-primary transition-colors flex items-center gap-1 opacity-0 group-hover:opacity-100">
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              View Source
+            </button>
+          )}
           {live && (
-            <span className="flex items-center gap-1 text-[9px] px-2 py-0.5 rounded-full bg-green/10 text-green border border-green/20">
-              <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />Live
+            <span className="text-xs text-muted/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              Open Demo
             </span>
           )}
         </div>
-        <span className="text-xs px-3 py-1 rounded-full font-mono shrink-0" style={{ backgroundColor: color + "15", color }}>{metrics}</span>
       </div>
-      <p className="text-sm text-muted leading-relaxed mb-4">{description}</p>
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {tags.map(t => <span key={t} className="text-[10px] px-2 py-0.5 rounded-full bg-surface-light text-muted/70 border border-border/30">{t}</span>)}
-      </div>
-      {github && (
-        <span className="text-xs text-muted group-hover:text-primary transition-colors flex items-center gap-1 opacity-0 group-hover:opacity-100">
-          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          View Source
-        </span>
-      )}
     </motion.div>
   );
 }
@@ -112,6 +147,7 @@ function ProjectCard({ title, description, metrics, tags, github, live, color, d
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const { t } = useLang();
 
   const line1 = useTypingEffect("$ whoami", 60, 500);
   const line2 = useTypingEffect("sedat — full-stack developer, systems thinker, building with AI", 30, 1800);
@@ -222,14 +258,14 @@ export default function Home() {
 
       {/* ═══════ PROJECTS ═══════ */}
       <Section id="projects">
-        <span className="text-xs font-mono text-primary tracking-wider">PROJECTS</span>
-        <h2 className="text-3xl font-bold mt-2 mb-3">What I&apos;ve built</h2>
-        <p className="text-sm text-muted mb-10">Production systems — from agent orchestration to SaaS backends.</p>
+        <span className="text-xs font-mono text-primary tracking-wider">{t.projects.section}</span>
+        <h2 className="text-3xl font-bold mt-2 mb-3">{t.projects.titleA}<span className="text-gradient">{t.projects.titleB}</span></h2>
+        <p className="text-sm text-muted mb-10">{t.projects.subtitle}</p>
         <div className="grid md:grid-cols-2 gap-4">
-          <ProjectCard title="AgentForge" description="Open-source AI agent orchestration. Self-healing watchdog, task queue with DLQ, WebSocket dashboard, Telegram bot, GitHub Actions + Claude Code review." metrics="1800+ lines" tags={["TypeScript", "Fastify", "Next.js", "Redis", "WebSocket", "Docker"]} github="https://github.com/irtassedat/agentforge" live="https://dashboard-rust-chi-93.vercel.app" color="#a855f7" delay={0} />
-          <ProjectCard title="QR Menu SaaS" description="Multi-brand restaurant management. 184 endpoints, 46 tables, 5-tier RBAC, loyalty programs, SMS OTP, dynamic themes." metrics="12.7K lines" tags={["Node.js", "Express", "PostgreSQL", "JWT"]} github="https://github.com/irtassedat/latestv2" live="https://qr.sebastianlogic.com/menu/29" color="#f59e0b" delay={0.1} />
-          <ProjectCard title="Community Platform" description="Real-time platform. 164 endpoints, 29 DB models, gamification, SEO automation (Yandex #1), 5 Docker containers, Nginx proxy." metrics="64.9K lines" tags={["Fastify", "Next.js", "PostgreSQL", "Redis", "Python", "Docker"]} color="#6366f1" delay={0.2} />
-          <ProjectCard title="Bot & AI Ecosystem" description="4 microservices. ML security (Isolation Forest), adaptive scoring, real-time event bus, multi-brand isolation, AI responses." metrics="15K lines" tags={["Python", "FastAPI", "Gemini AI", "SQLite", "Telethon"]} color="#ec4899" delay={0.3} />
+          <ProjectCard title={t.projects.items[2]?.title ?? "AgentForge"} description={t.projects.items[2]?.desc ?? ""} metrics="1800+ lines" tags={["TypeScript", "Fastify", "Next.js", "Redis", "WebSocket", "Docker"]} github="https://github.com/irtassedat/agentforge" live="https://dashboard-rust-chi-93.vercel.app" color="#a855f7" delay={0} />
+          <ProjectCard title={t.projects.items[0]?.title ?? "QR Menu SaaS"} description={t.projects.items[0]?.desc ?? ""} metrics="12.7K lines" tags={["Node.js", "Express", "PostgreSQL", "JWT"]} github="https://github.com/irtassedat/latestv2" live="https://qr.sebastianlogic.com/menu/29" color="#f59e0b" delay={0.1} preview="/qrmenu-preview.png" />
+          <ProjectCard title={t.projects.items[8]?.title ?? "Community Platform"} description={t.projects.items[8]?.desc ?? ""} metrics="64.9K lines" tags={["Fastify", "Next.js", "PostgreSQL", "Redis", "Python", "Docker"]} color="#6366f1" delay={0.2} />
+          <ProjectCard title={t.projects.items[4]?.title ?? "Bot & AI Ecosystem"} description={t.projects.items[4]?.desc ?? ""} metrics="15K lines" tags={["Python", "FastAPI", "Gemini AI", "SQLite", "Telethon"]} color="#ec4899" delay={0.3} />
         </div>
       </Section>
 
