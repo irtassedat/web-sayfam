@@ -68,7 +68,7 @@ function ProjectCard({ title, description, metrics, tags, github, live, color, d
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay, duration: 0.5 }}
-      className="card-glow rounded-2xl p-6 group"
+      className="card-glow rounded-2xl p-6 group relative"
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3 flex-wrap">
@@ -93,22 +93,12 @@ function ProjectCard({ title, description, metrics, tags, github, live, color, d
         </a>
       )}
       {live && live.includes("sebastianlogic") && (
-        <div className="mt-4 pt-4 border-t border-border/30">
-          <div className="flex items-end gap-5">
-            <a href={live} target="_blank" rel="noopener noreferrer" className="relative w-[160px] shrink-0 rounded-[1.5rem] border-[5px] border-foreground/15 bg-black shadow-2xl overflow-hidden block hover:border-primary/40 transition-colors">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-3 bg-foreground/15 rounded-b-lg z-10" />
-              <img src="/qrmenu-preview.png" alt="QR Menu Mobile Preview" className="w-full" />
-            </a>
-            <div className="pb-2">
-              <p className="text-[10px] text-muted/50 uppercase tracking-wider font-semibold mb-1">Live Demo</p>
-              <p className="text-xs text-muted/70 mb-3">Tap the phone to open the live mobile menu</p>
-              <a href={live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary/10 text-primary text-xs font-medium border border-primary/20 hover:bg-primary/20 transition-colors">
-                <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
-                Open Live Demo
-              </a>
-            </div>
+        <a href={live} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="absolute bottom-3 right-3 w-[70px] opacity-30 hover:opacity-90 hover:scale-110 transition-all duration-300 z-10">
+          <div className="relative rounded-[0.6rem] border-[2px] border-foreground/20 bg-black overflow-hidden shadow-lg">
+            <img src="/qrmenu-preview.png" alt="QR Menu" className="w-full" />
           </div>
-        </div>
+          <p className="text-[7px] text-center text-muted/50 mt-1">Live Demo</p>
+        </a>
       )}
     </motion.div>
   );
@@ -232,7 +222,7 @@ export default function Home() {
         <p className="text-sm text-muted mb-10">Production systems — from agent orchestration to SaaS backends.</p>
         <div className="grid md:grid-cols-2 gap-4">
           <ProjectCard title="AgentForge" description="Open-source AI agent orchestration. Self-healing watchdog, task queue with DLQ, WebSocket dashboard, Telegram bot, GitHub Actions + Claude Code review." metrics="1800+ lines" tags={["TypeScript", "Fastify", "Next.js", "Redis", "WebSocket", "Docker"]} github="https://github.com/irtassedat/agentforge" live="https://dashboard-rust-chi-93.vercel.app" color="#a855f7" delay={0} />
-          <ProjectCard title="QR Menu SaaS" description="Multi-brand restaurant management. 184 endpoints, 46 tables, 5-tier RBAC, loyalty programs, SMS OTP, dynamic themes." metrics="12.7K lines" tags={["Node.js", "Express", "PostgreSQL", "JWT"]} github="https://github.com/irtassedat/qrmenu-backend" live="https://qr.sebastianlogic.com/menu/29" color="#f59e0b" delay={0.1} />
+          <ProjectCard title="QR Menu SaaS" description="Multi-brand restaurant management. 184 endpoints, 46 tables, 5-tier RBAC, loyalty programs, SMS OTP, dynamic themes." metrics="12.7K lines" tags={["Node.js", "Express", "PostgreSQL", "JWT"]} github="https://github.com/irtassedat/latestv2" live="https://qr.sebastianlogic.com/menu/29" color="#f59e0b" delay={0.1} />
           <ProjectCard title="Community Platform" description="Real-time platform. 164 endpoints, 29 DB models, gamification, SEO automation (Yandex #1), 5 Docker containers, Nginx proxy." metrics="64.9K lines" tags={["Fastify", "Next.js", "PostgreSQL", "Redis", "Python", "Docker"]} color="#6366f1" delay={0.2} />
           <ProjectCard title="Bot & AI Ecosystem" description="4 microservices. ML security (Isolation Forest), adaptive scoring, real-time event bus, multi-brand isolation, AI responses." metrics="15K lines" tags={["Python", "FastAPI", "Gemini AI", "SQLite", "Telethon"]} color="#ec4899" delay={0.3} />
         </div>
