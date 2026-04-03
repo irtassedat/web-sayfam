@@ -142,6 +142,23 @@ function ProjectCard({ base, text, index }: {
                   ))}
                 </div>
               )}
+              {base.live && base.live.includes("sebastianlogic") && (
+                <div className="mt-4 pt-4 border-t border-border/30">
+                  <p className="text-[10px] text-muted/60 uppercase tracking-wider font-semibold mb-3">Canli Demo</p>
+                  <div className="flex justify-center">
+                    <div className="relative mx-auto w-[200px] h-[400px] rounded-[2rem] border-[6px] border-foreground/20 bg-black shadow-2xl overflow-hidden">
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-foreground/20 rounded-b-xl z-10" />
+                      <iframe
+                        src={base.live}
+                        className="w-[390px] h-[844px] origin-top-left border-0"
+                        style={{ transform: "scale(0.4835)", transformOrigin: "top left" }}
+                        title="QR Menu Live Demo"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
