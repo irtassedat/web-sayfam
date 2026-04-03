@@ -94,17 +94,18 @@ function ProjectCard({ title, description, metrics, tags, github, live, color, d
       )}
       {live && live.includes("sebastianlogic") && (
         <div className="mt-4 pt-4 border-t border-border/30">
-          <p className="text-[10px] text-muted/50 uppercase tracking-wider font-semibold mb-3">Mobile Preview</p>
-          <div className="flex justify-center">
-            <div className="relative w-[180px] h-[370px] rounded-[1.8rem] border-[5px] border-foreground/15 bg-black shadow-2xl overflow-hidden">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3.5 bg-foreground/15 rounded-b-lg z-10" />
-              <iframe
-                src={live}
-                className="w-[390px] h-[844px] border-0"
-                style={{ transform: "scale(0.461)", transformOrigin: "top left" }}
-                title="QR Menu Live Demo"
-                loading="lazy"
-              />
+          <div className="flex items-end gap-5">
+            <a href={live} target="_blank" rel="noopener noreferrer" className="relative w-[160px] shrink-0 rounded-[1.5rem] border-[5px] border-foreground/15 bg-black shadow-2xl overflow-hidden block hover:border-primary/40 transition-colors">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-3 bg-foreground/15 rounded-b-lg z-10" />
+              <img src="/qrmenu-preview.png" alt="QR Menu Mobile Preview" className="w-full" />
+            </a>
+            <div className="pb-2">
+              <p className="text-[10px] text-muted/50 uppercase tracking-wider font-semibold mb-1">Live Demo</p>
+              <p className="text-xs text-muted/70 mb-3">Tap the phone to open the live mobile menu</p>
+              <a href={live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary/10 text-primary text-xs font-medium border border-primary/20 hover:bg-primary/20 transition-colors">
+                <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
+                Open Live Demo
+              </a>
             </div>
           </div>
         </div>
