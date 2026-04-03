@@ -62,22 +62,35 @@ function ProjectCard({ title, description, metrics, tags, github, live, color, d
   title: string; description: string; metrics: string; tags: string[];
   github?: string; live?: string; color: string; delay: number;
 }) {
+  const handleClick = () => {
+    if (live?.includes("sebastianlogic")) {
+      window.open(live, "_blank", "width=420,height=880,menubar=no,toolbar=no,location=no,status=no");
+    } else if (live) {
+      window.open(live, "_blank");
+    } else if (github) {
+      window.open(github, "_blank");
+    } else {
+      window.open("https://github.com/irtassedat", "_blank");
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay, duration: 0.5 }}
-      className="card-glow rounded-2xl p-6 group relative"
+      onClick={handleClick}
+      className="card-glow rounded-2xl p-6 group cursor-pointer"
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3 flex-wrap">
           <div className="w-2 h-2 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 12px ${color}50` }} />
           <h3 className="font-semibold">{title}</h3>
           {live && (
-            <a href={live} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="flex items-center gap-1 text-[9px] px-2 py-0.5 rounded-full bg-green/10 text-green border border-green/20 hover:bg-green/20 transition-colors">
+            <span className="flex items-center gap-1 text-[9px] px-2 py-0.5 rounded-full bg-green/10 text-green border border-green/20">
               <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />Live
-            </a>
+            </span>
           )}
         </div>
         <span className="text-xs px-3 py-1 rounded-full font-mono shrink-0" style={{ backgroundColor: color + "15", color }}>{metrics}</span>
@@ -87,18 +100,10 @@ function ProjectCard({ title, description, metrics, tags, github, live, color, d
         {tags.map(t => <span key={t} className="text-[10px] px-2 py-0.5 rounded-full bg-surface-light text-muted/70 border border-border/30">{t}</span>)}
       </div>
       {github && (
-        <a href={github} target="_blank" rel="noopener noreferrer" className="text-xs text-muted hover:text-primary transition-colors flex items-center gap-1 opacity-0 group-hover:opacity-100">
+        <span className="text-xs text-muted group-hover:text-primary transition-colors flex items-center gap-1 opacity-0 group-hover:opacity-100">
           <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           View Source
-        </a>
-      )}
-      {live && live.includes("sebastianlogic") && (
-        <a href={live} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="absolute bottom-3 right-3 w-[70px] opacity-30 hover:opacity-90 hover:scale-110 transition-all duration-300 z-10">
-          <div className="relative rounded-[0.6rem] border-[2px] border-foreground/20 bg-black overflow-hidden shadow-lg">
-            <img src="/qrmenu-preview.png" alt="QR Menu" className="w-full" />
-          </div>
-          <p className="text-[7px] text-center text-muted/50 mt-1">Live Demo</p>
-        </a>
+        </span>
       )}
     </motion.div>
   );
