@@ -9,7 +9,7 @@ const dict = {
     hero: {
       firstName: "Sedat",
       lastName: "İrtaş",
-      roles: ["Full-Stack Geliştirici", "AI Sistem Mühendisi", "Veri Pipeline Mimarı", "Otomasyon Uzmanı"],
+      roles: ["Full-Stack Developer", "Backend Developer", "DevOps & Infrastructure", "Building with AI"],
       desc: "Gerçek zamanlı veri işlemeden otonom AI ajanlara, ölçeklenebilir full-stack platformlardan akıllı otomasyon sistemlerine kadar üretim seviyesinde yazılımlar geliştiriyorum.",
       cta: { projects: "Projelerimi İncele", github: "GitHub", linkedin: "LinkedIn" },
       stats: [
@@ -25,7 +25,7 @@ const dict = {
       titleB: "Olduğum",
       bio: "Endüstri Mühendisliği altyapımdan gelen sistematik düşünce ve optimizasyon becerileriyle, yazılım mühendisliğinde üretim seviyesinde sistemler kuruyorum. Full-stack web geliştirmeden otonom AI ajan orkestrasyonuna, gerçek zamanlı veri pipeline'larından akıllı otomasyon botlarına kadar geniş bir yelpazede projeler geliştirdim. Her projede ölçeklenebilirlik, güvenilirlik ve performansı ön planda tutuyorum.",
       name: "Sedat İrtaş",
-      role: "Endüstri Mühendisi & Yazılım Geliştirici",
+      role: "Full-Stack Developer",
       statusAvailable: "Müsait",
       location: "Antalya, Türkiye",
       locationDesc: "Remote pozisyonlara öncelikli olarak başvuruyorum. Doğru fırsat için taşınmaya açığım.",
@@ -88,13 +88,13 @@ const dict = {
           metrics: "Gerçek Zamanlı",
         },
         {
-          title: "Pattern Recognition & Risk Motoru",
+          title: "ML Güvenlik Modülü",
           desc: "Davranış kalıplarını çok parametreli analiz eden, otomatik risk skoru üreten hibrit motor. ML tabanlı anomali tespiti.",
           longDesc: "Kullanıcı davranışlarını çok parametreli olarak analiz eder, anomali tespit eder ve otomatik risk skoru üretir. Kural tabanlı motor + ML tabanlı pattern matching hibrit yaklaşım kullanır. Eşik değerleri dinamik olarak ayarlanır, sistem kendi kendine öğrenme kapasitesine sahiptir.",
           metrics: "ML Tabanlı",
         },
         {
-          title: "Çok Kaynaklı API Agregasyon Platformu",
+          title: "Veri Toplama Pipeline",
           desc: "Çoklu API kaynağından paralel veri toplama, normalizasyon ve karşılaştırmalı analiz pipeline'ı.",
           longDesc: "Farklı formatlardaki Çoklu API kaynağından verileri paralel olarak çeker, normalize eder ve birleşik bir veritabanında depolar. Rate limiting, exponential backoff retry mekanizması, circuit breaker pattern ve veri tutarlılık kontrolü içerir.",
           metrics: "Çoklu Kaynak",
@@ -170,7 +170,7 @@ const dict = {
     hero: {
       firstName: "Sedat",
       lastName: "Irtas",
-      roles: ["Full-Stack Developer", "Backend Engineer", "DevOps", "Automation"],
+      roles: ["Full-Stack Developer", "Backend Developer", "DevOps & Infrastructure", "Building with AI"],
       desc: "I build production-grade software — from real-time data processing to autonomous AI agents, from scalable full-stack platforms to intelligent automation systems.",
       cta: { projects: "View Projects", github: "GitHub", linkedin: "LinkedIn" },
       stats: [
@@ -186,7 +186,7 @@ const dict = {
       titleB: "I Am",
       bio: "With a foundation in Industrial Engineering — systematic thinking, optimization, and process modeling — I build production-grade software systems. From full-stack web development to autonomous AI agent orchestration, from real-time data pipelines to intelligent automation bots. Every project prioritizes scalability, reliability, and performance.",
       name: "Sedat Irtas",
-      role: "Industrial Engineer & Software Developer",
+      role: "Full-Stack Developer",
       statusAvailable: "Available",
       location: "Antalya, Turkey",
       locationDesc: "Primarily seeking remote positions. Open to relocation for the right opportunity.",
@@ -249,13 +249,13 @@ const dict = {
           metrics: "Real-Time",
         },
         {
-          title: "Pattern Recognition & Risk Engine",
+          title: "ML Security Module",
           desc: "Hybrid engine analyzing behavioral patterns with multi-parameter analysis and automatic risk scoring. ML-based anomaly detection.",
           longDesc: "Analyzes user behaviors with multi-parameter analysis, detects anomalies, and generates automatic risk scores. Uses a hybrid approach combining rule-based engine with ML-based pattern matching. Dynamic threshold adjustment with self-learning capability.",
           metrics: "ML-Based",
         },
         {
-          title: "Multi-Source API Aggregation Platform",
+          title: "Data Collection Pipeline",
           desc: "Parallel data collection, normalization, and comparative analysis pipeline from Multiple API sources.",
           longDesc: "Pulls data in parallel from Multiple API sources in different formats, normalizes and stores in a unified database. Includes rate limiting, exponential backoff retry, circuit breaker pattern, and data consistency checks.",
           metrics: "Multi-Source",
@@ -331,7 +331,7 @@ const dict = {
     hero: {
       firstName: "Sedat",
       lastName: "Irtas",
-      roles: ["Sviluppatore Full-Stack", "Ingegnere Sistemi AI", "Architetto Data Pipeline", "Specialista Automazione"],
+      roles: ["Full-Stack Developer", "Backend Developer", "DevOps & Infrastructure", "Building with AI"],
       desc: "Sviluppo software di livello produttivo — dall'elaborazione dati in tempo reale agli agenti AI autonomi, dalle piattaforme full-stack scalabili ai sistemi di automazione intelligente.",
       cta: { projects: "Vedi Progetti", github: "GitHub", linkedin: "LinkedIn" },
       stats: [
@@ -347,7 +347,7 @@ const dict = {
       titleB: "Sono",
       bio: "Con una base in Ingegneria Industriale — pensiero sistematico, ottimizzazione e modellazione dei processi — costruisco sistemi software di livello produttivo. Dallo sviluppo web full-stack all'orchestrazione di agenti AI autonomi, dalle pipeline dati in tempo reale ai bot di automazione intelligente. Ogni progetto da priorita a scalabilita, affidabilita e prestazioni.",
       name: "Sedat Irtas",
-      role: "Ingegnere Industriale & Sviluppatore Software",
+      role: "Full-Stack Developer",
       statusAvailable: "Disponibile",
       location: "Antalya, Turchia",
       locationDesc: "Cerco principalmente posizioni remote. Aperto al trasferimento per l'opportunita giusta.",
@@ -410,7 +410,7 @@ const dict = {
           metrics: "Tempo Reale",
         },
         {
-          title: "Motore Pattern Recognition & Rischio",
+          title: "ML Security Module",
           desc: "Motore ibrido che analizza pattern comportamentali con analisi multi-parametro e scoring automatico del rischio. Rilevamento anomalie basato su ML.",
           longDesc: "Analizza i comportamenti utente con analisi multi-parametro, rileva anomalie e genera punteggi di rischio automatici. Approccio ibrido: motore basato su regole + pattern matching basato su ML.",
           metrics: "ML-Based",
