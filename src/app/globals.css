@@ -197,8 +197,6 @@ body { background: var(--background); color: var(--foreground); font-family: var
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
-  /* Tilt the ring so it looks like a 3D orbit */
-  transform: rotateX(var(--ring-tilt, 70deg));
 }
 
 /* The visual ring track — a circle outline */
@@ -213,18 +211,15 @@ body { background: var(--background); color: var(--foreground); font-family: var
   opacity: 0.12;
 }
 
-/* Wrapper for each tag — rotates around the ring center */
+/* Wrapper for each tag — positions on the ring circumference */
 .orbit-tag-wrapper {
   position: absolute;
   top: 50%; left: 50%;
   width: 0; height: 0;
   transform-style: preserve-3d;
-  animation: inherit;
-  /* Counter-rotation is handled inline; the wrapper just positions on the ring */
   transform:
     rotate(var(--tag-angle, 0deg))
     translateX(var(--ring-radius, 140px))
-    /* Counter-rotate so text stays upright, and un-tilt */
     rotate(calc(-1 * var(--tag-angle, 0deg)))
     rotateX(calc(-1 * var(--ring-tilt, 70deg)));
 }

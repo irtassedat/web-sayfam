@@ -201,9 +201,10 @@ function ProjectCard({ title, description, metrics, tags, github, live, color, d
             </button>
           )}
           {live && (
-            <span className="text-xs text-muted/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+            <span className="text-xs text-primary/70 group-hover:text-primary opacity-0 group-hover:opacity-100 transition-all flex items-center gap-1.5 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
               Open Demo
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </span>
           )}
         </div>
