@@ -226,6 +226,15 @@ export default function Home() {
   const [introHidden, setIntroHidden] = useState(false);
 
   useEffect(() => {
+    if (!introComplete) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [introComplete]);
+
+  useEffect(() => {
     if (line3.done && !introComplete) {
       const timer = setTimeout(() => setIntroComplete(true), 1500);
       return () => clearTimeout(timer);

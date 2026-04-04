@@ -555,13 +555,13 @@ interface LangContextType {
 }
 
 const LangContext = createContext<LangContextType>({
-  lang: "tr",
+  lang: "en",
   setLang: () => {},
-  t: dict.tr,
+  t: dict.en,
 });
 
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("tr");
+  const [lang, setLangState] = useState<Lang>("en");
 
   useEffect(() => {
     const saved = localStorage.getItem("portfolio-lang") as Lang | null;
