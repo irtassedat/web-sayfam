@@ -46,8 +46,8 @@ export default function Navbar() {
       {/* Desktop: Floating pill */}
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
-        animate={{ y: scrolled ? 0 : -100, opacity: scrolled ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
         className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] hidden md:block"
       >
         <div className="glass-strong rounded-2xl px-2 py-1.5 flex items-center gap-1 shadow-2xl shadow-black/20">

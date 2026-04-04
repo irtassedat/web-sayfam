@@ -213,6 +213,55 @@ function ProjectCard({ title, description, metrics, tags, github, live, color, d
   );
 }
 
+function MoreProjects({ t }: { t: ReturnType<typeof useLang>["t"] }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const extraProjects = [
+    { title: t.projects.items[1]?.title ?? "E-Commerce Platform", desc: t.projects.items[1]?.desc ?? "", metrics: "Full-Stack", tags: ["React", "Redux", "Java", "Spring Boot", "PostgreSQL"], github: "https://github.com/irtassedat/ecommerce", color: "#ef4444" },
+    { title: t.projects.items[3]?.title ?? "Real-Time Data Platform", desc: t.projects.items[3]?.desc ?? "", metrics: "Real-Time", tags: ["Python", "WebSocket", "Redis", "PostgreSQL", "Docker"], color: "#6366f1" },
+    { title: t.projects.items[5]?.title ?? "Data Pipeline", desc: t.projects.items[5]?.desc ?? "", metrics: "Multi-Source", tags: ["TypeScript", "REST API", "Playwright", "Docker"], color: "#10b981" },
+    { title: t.projects.items[6]?.title ?? "Predictive Analytics", desc: t.projects.items[6]?.desc ?? "", metrics: "Full-Stack + Bot", tags: ["React", "Node.js", "PostgreSQL", "Telegram Bot"], color: "#14b8a6" },
+    { title: t.projects.items[7]?.title ?? "Monitoring System", desc: t.projects.items[7]?.desc ?? "", metrics: "24/7 Active", tags: ["Node.js", "Telegram API", "Cron", "Docker"], color: "#06b6d4" },
+    { title: t.projects.items[9]?.title ?? "SEO Automation", desc: t.projects.items[9]?.desc ?? "", metrics: "#1 Ranking", tags: ["Python", "Node.js", "Yandex SEO", "Cloudflare"], color: "#84cc16" },
+  ];
+
+  return (
+    <div className="mt-8 text-center">
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4 }}
+            className="grid md:grid-cols-2 gap-4 mb-6 overflow-hidden"
+          >
+            {extraProjects.map((p, i) => (
+              <ProjectCard key={p.title} title={p.title} description={p.desc} metrics={p.metrics} tags={p.tags} github={p.github} color={p.color} delay={i * 0.05} />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl glass text-sm text-muted hover:text-foreground hover:border-primary/30 transition-all"
+      >
+        <motion.svg
+          animate={{ rotate: expanded ? 180 : 0 }}
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </motion.svg>
+        {expanded ? (t.projects.collapseHint ?? "Show less") : (t.projects.expandHint ?? "View all projects")}
+      </button>
+    </div>
+  );
+}
+
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -259,6 +308,12 @@ export default function Home() {
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
           >
             <HeroControls />
+            <button
+              onClick={() => setIntroComplete(true)}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[11px] text-muted/30 hover:text-muted/70 transition-colors font-mono tracking-wider"
+            >
+              skip intro &rarr;
+            </button>
             <div className="max-w-3xl w-full">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <div className="rounded-xl overflow-hidden border border-border/50 bg-surface/80 backdrop-blur-sm">
@@ -390,6 +445,7 @@ export default function Home() {
           <ProjectCard title={t.projects.items[8]?.title ?? "Community Platform"} description={t.projects.items[8]?.desc ?? ""} metrics="64.9K lines" tags={["Fastify", "Next.js", "PostgreSQL", "Redis", "Python", "Docker"]} color="#6366f1" delay={0.2} />
           <ProjectCard title={t.projects.items[4]?.title ?? "Bot & AI Ecosystem"} description={t.projects.items[4]?.desc ?? ""} metrics="15K lines" tags={["Python", "FastAPI", "Gemini AI", "SQLite", "Telethon"]} color="#ec4899" delay={0.3} />
         </div>
+        <MoreProjects t={t} />
       </Section>
 
       <div className="section-divider" />
