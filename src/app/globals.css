@@ -192,7 +192,7 @@ body { background: var(--background); color: var(--foreground); font-family: var
   transform-style: preserve-3d;
 }
 
-/* Each orbit ring — absolute-centered, preserves 3D */
+/* Each orbit ring — absolute-centered, 3D */
 .orbit-ring {
   position: absolute;
   inset: 0;
@@ -211,42 +211,60 @@ body { background: var(--background); color: var(--foreground); font-family: var
   opacity: 0.12;
 }
 
-/* Wrapper for each tag — positions on the ring circumference */
+/* Wrapper for each tag — positioned by animation keyframes */
 .orbit-tag-wrapper {
   position: absolute;
   top: 50%; left: 50%;
   width: 0; height: 0;
   transform-style: preserve-3d;
-  transform:
-    rotate(var(--tag-angle, 0deg))
-    translateX(var(--ring-radius, 140px))
-    rotate(calc(-1 * var(--tag-angle, 0deg)))
-    rotateX(calc(-1 * var(--ring-tilt, 70deg)));
+}
+
+/* Counter-rotate tag wrapper so text stays upright while ring spins in 3D */
+.orbit-ring-0 .orbit-tag-wrapper { animation: orbit-counter-0 24s linear infinite reverse; }
+.orbit-ring-1 .orbit-tag-wrapper { animation: orbit-counter-1 32s linear infinite; }
+.orbit-ring-2 .orbit-tag-wrapper { animation: orbit-counter-2 40s linear infinite reverse; }
+.orbit-ring-3 .orbit-tag-wrapper { animation: orbit-counter-3 48s linear infinite; }
+
+@keyframes orbit-counter-0 {
+  from { transform: rotate(var(--tag-angle, 0deg)) translateX(var(--ring-radius, 140px)) rotateZ(0deg) rotateX(-72deg); }
+  to   { transform: rotate(var(--tag-angle, 0deg)) translateX(var(--ring-radius, 140px)) rotateZ(360deg) rotateX(-72deg); }
+}
+@keyframes orbit-counter-1 {
+  from { transform: rotate(var(--tag-angle, 0deg)) translateX(var(--ring-radius, 195px)) rotateZ(0deg) rotateX(-65deg); }
+  to   { transform: rotate(var(--tag-angle, 0deg)) translateX(var(--ring-radius, 195px)) rotateZ(-360deg) rotateX(-65deg); }
+}
+@keyframes orbit-counter-2 {
+  from { transform: rotate(var(--tag-angle, 0deg)) translateX(var(--ring-radius, 250px)) rotateZ(0deg) rotateX(-75deg); }
+  to   { transform: rotate(var(--tag-angle, 0deg)) translateX(var(--ring-radius, 250px)) rotateZ(360deg) rotateX(-75deg); }
+}
+@keyframes orbit-counter-3 {
+  from { transform: rotate(var(--tag-angle, 0deg)) translateX(var(--ring-radius, 305px)) rotateZ(0deg) rotateX(-68deg); }
+  to   { transform: rotate(var(--tag-angle, 0deg)) translateX(var(--ring-radius, 305px)) rotateZ(-360deg) rotateX(-68deg); }
 }
 
 /* The actual tag pill */
 .orbit-tag {
   white-space: nowrap;
-  font-size: 10px;
+  font-size: 13px;
+  font-weight: 600;
   font-family: var(--font-mono), monospace;
-  padding: 3px 10px;
+  padding: 5px 14px;
   border-radius: 9999px;
   color: var(--tag-color, var(--foreground));
-  background: rgba(15, 15, 20, 0.7);
-  border: 1px solid color-mix(in srgb, var(--tag-color) 25%, transparent);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--tag-color) 15%, transparent);
+  background: rgba(15, 15, 20, 0.85);
+  border: 1px solid color-mix(in srgb, var(--tag-color) 30%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--tag-color) 20%, transparent);
   transform: translate(-50%, -50%);
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
   cursor: default;
-  backface-visibility: hidden;
 }
 .light .orbit-tag {
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid color-mix(in srgb, var(--tag-color) 35%, transparent);
 }
 .orbit-tag:hover {
-  transform: translate(-50%, -50%) translateZ(30px) scale(1.12);
-  box-shadow: 0 0 24px color-mix(in srgb, var(--tag-color) 40%, transparent);
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--tag-color) 50%, transparent);
   background: rgba(15, 15, 20, 0.95);
   color: #fff;
   z-index: 100;
@@ -292,7 +310,7 @@ body { background: var(--background); color: var(--foreground); font-family: var
   animation: orbit-spin 48s linear infinite reverse;
 }
 
-/* The actual orbit rotation keyframe */
+/* The actual orbit rotation keyframe — 3D tilt + spin */
 @keyframes orbit-spin {
   from { transform: rotateX(var(--ring-tilt, 70deg)) rotateZ(0deg); }
   to   { transform: rotateX(var(--ring-tilt, 70deg)) rotateZ(360deg); }
