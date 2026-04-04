@@ -21,10 +21,10 @@ const dict = {
       terminal: {
         line2: "sedat — full-stack developer, sistem düşünürü, AI ile inşa ediyor",
         journey: [
-          "oyun → sunucular → <özgürlük>",
-          "endüstri mühendisliği → <sistem düşüncesi>",
-          "AI devrimi → <geçiş yaptım>",
-          "2 yıl sonra → <130K+ satır production kodu>",
+          "# merak: sunucuları söktüm, sistemleri anladım",
+          "# mühendislik: süreçleri optimize etmeyi öğrendim",
+          "# yazılım: <2 yılda 4 platformu production'a taşıdım>",
+          "# şimdi: <AI ile inşa ediyorum, tek başıma ekip kadar>",
         ],
       },
     },
@@ -201,10 +201,10 @@ const dict = {
       terminal: {
         line2: "sedat — full-stack developer, systems thinker, building with AI",
         journey: [
-          "gaming → servers → <freedom>",
-          "industrial engineering → <systems thinking>",
-          "AI revolution → <made the switch>",
-          "2 years later → <130K+ lines of production code>",
+          "# curiosity: took apart servers, understood systems",
+          "# engineering: learned to optimize processes",
+          "# software: <shipped 4 platforms to production in 2 years>",
+          "# now: <building with AI, one person doing what teams used to>",
         ],
       },
     },
@@ -381,10 +381,10 @@ const dict = {
       terminal: {
         line2: "sedat — full-stack developer, pensatore di sistemi, costruisco con AI",
         journey: [
-          "gaming → server → <libertà>",
-          "ingegneria industriale → <pensiero sistemico>",
-          "rivoluzione AI → <ho fatto il cambio>",
-          "2 anni dopo → <130K+ righe di codice production>",
+          "# curiosità: ho smontato server, capito i sistemi",
+          "# ingegneria: ho imparato a ottimizzare i processi",
+          "# software: <4 piattaforme in produzione in 2 anni>",
+          "# ora: <costruisco con AI, una persona fa il lavoro di un team>",
         ],
       },
     },
