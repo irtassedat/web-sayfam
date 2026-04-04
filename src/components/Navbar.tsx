@@ -48,7 +48,7 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: scrolled ? 0 : -100, opacity: scrolled ? 1 : 0 }}
         transition={{ duration: 0.3 }}
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:block"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] hidden md:block"
       >
         <div className="glass-strong rounded-2xl px-2 py-1.5 flex items-center gap-1 shadow-2xl shadow-black/20">
           <a href="#hero" className="flex items-center gap-2 px-3 py-1.5">
@@ -100,7 +100,7 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 md:hidden transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[999] md:hidden transition-all duration-300 ${
           scrolled ? "glass-strong" : "bg-transparent"
         }`}
       >

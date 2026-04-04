@@ -18,12 +18,28 @@ const dict = {
         { n: "400+", l: "API Endpoint" },
         { n: "3", l: "Full-Stack Platform" },
       ],
+      terminal: {
+        line2: "sedat — full-stack developer, sistem düşünürü, AI ile inşa ediyor",
+        journey: [
+          "oyun → sunucular → <özgürlük>",
+          "endüstri mühendisliği → <sistem düşüncesi>",
+          "AI devrimi → <geçiş yaptım>",
+          "2 yıl sonra → <130K+ satır production kodu>",
+        ],
+      },
     },
     about: {
       section: "HAKKIMDA",
       titleA: "Kim ",
       titleB: "Olduğum",
+      howIGotHere: "Buraya Nasıl Geldim",
       bio: "Endüstri Mühendisliği altyapımdan gelen sistematik düşünce ve optimizasyon becerileriyle, yazılım mühendisliğinde üretim seviyesinde sistemler kuruyorum. Full-stack web geliştirmeden otonom AI ajan orkestrasyonuna, gerçek zamanlı veri pipeline'larından akıllı otomasyon botlarına kadar geniş bir yelpazede projeler geliştirdim. Her projede ölçeklenebilirlik, güvenilirlik ve performansı ön planda tutuyorum.",
+      paragraphs: [
+        "Bilgisayarlarla oyun üzerinden tanıştım — ama sadece oynamadım. Sunucuları kurcaladım, sistemlerin nasıl çalıştığını anlamaya çalıştım. Beni yakalayan şey <özgürlük> oldu — bilgisayara doğru soruyu sor, her zaman bir cevap var.",
+        "Bu merak beni endüstri mühendisliğine götürdü. Sonra AI'ın her şeyi değiştirdiğini gördüm ve doğru araçlarla bir kişinin eskiden tüm ekiplerin yaptığını yapabileceğini fark ettim. Olasılıklar yeniden <sınırsız> hissettirdi.",
+        "AI'ı sadece kullanmıyorum — AI ile inşa ediyorum. CI/CD pipeline'ımda LLM'ler, araç orkestrasyonu için MCP sunucuları, kendini izleyen ve onaran otonom ajanlar. <Yazılım geliştirme şekli değişiyor ve ben başından beri bu şekilde geliştiriyorum.>",
+        "Hâlâ öğreniyorum. Ama ne kadar hızlı öğrendiğim en güçlü özelliğim.",
+      ],
       name: "Sedat İrtaş",
       role: "Full-Stack Developer",
       statusAvailable: "Müsait",
@@ -141,6 +157,7 @@ const dict = {
       ],
       awarenessTitle: "Sürekli Öğrenme & Endüstri Takibi",
       awarenessSub: "Güncel kalarak en yeni teknolojileri projelerime entegre ediyorum",
+      aiNative: { title: "AI-NATIVE İŞ AKIŞI", desc: "Mimari tasarım ve otomatik review için Claude Code. Araç orkestrasyonu için MCP sunucuları. Kendini izleyen ve onaran otonom ajanlar." },
       areas: [
         { label: "AI & LLM Ekosistemi", items: "Claude AI, MCP Protokolü, Ajan Orkestrasyonu, RAG, Vector DB, Prompt Engineering" },
         { label: "Modern Web & Cloud", items: "Next.js App Router, Server Components, Edge Runtime, Serverless, Vercel, Docker Swarm" },
@@ -158,6 +175,8 @@ const dict = {
       socialLabels: { github: "GitHub", linkedin: "LinkedIn", email: "E-posta" },
       availableTitle: "Yeni fırsatlara açığım",
       availableSub: "Remote, freelance veya danışmanlık",
+      openTo: "Full-stack ve backend pozisyonlara açığım. Remote tercihli.",
+      letsChat: "Konuşalım",
     },
     footer: {
       built: "Next.js + Tailwind CSS + Framer Motion ile tasarlandı",
@@ -179,12 +198,28 @@ const dict = {
         { n: "400+", l: "API Endpoints" },
         { n: "3", l: "Full-Stack Platforms" },
       ],
+      terminal: {
+        line2: "sedat — full-stack developer, systems thinker, building with AI",
+        journey: [
+          "gaming → servers → <freedom>",
+          "industrial engineering → <systems thinking>",
+          "AI revolution → <made the switch>",
+          "2 years later → <130K+ lines of production code>",
+        ],
+      },
     },
     about: {
       section: "ABOUT",
       titleA: "Who ",
       titleB: "I Am",
+      howIGotHere: "How I got here",
       bio: "With a foundation in Industrial Engineering — systematic thinking, optimization, and process modeling — I build production-grade software systems. From full-stack web development to autonomous AI agent orchestration, from real-time data pipelines to intelligent automation bots. Every project prioritizes scalability, reliability, and performance.",
+      paragraphs: [
+        "I got into computers through gaming — but I didn't just play. I dug into servers, tried to figure out how systems worked under the hood. What hooked me was the <freedom> — ask a computer the right question and there's always an answer.",
+        "That curiosity led me to industrial engineering. Then I watched AI change everything and realized that one person with the right tools could build what used to take entire teams. The possibilities felt <limitless> again.",
+        "I don't just use AI — I build with it. LLMs in my CI/CD pipeline, MCP servers for tool orchestration, autonomous agents that monitor and heal themselves. <The way software gets built is changing, and I've been building that way from the start.>",
+        "Still learning. But how fast I learn is my strongest trait.",
+      ],
       name: "Sedat Irtas",
       role: "Full-Stack Developer",
       statusAvailable: "Available",
@@ -300,6 +335,7 @@ const dict = {
         { title: "Data & Infrastructure", skills: ["PostgreSQL", "MongoDB", "Redis", "Docker / Compose", "Supabase", "Nginx / Deployment"] },
         { title: "AI & Automation", skills: ["Claude AI / MCP", "Telegram Bot API", "Puppeteer / Playwright", "Pattern Matching", "Swarm Intelligence", "Cron & Scheduling"] },
       ],
+      aiNative: { title: "AI-NATIVE WORKFLOW", desc: "Claude Code for architecture and automated review. MCP servers for tool orchestration. Autonomous agents that monitor and heal themselves." },
       awarenessTitle: "Continuous Learning & Industry Tracking",
       awarenessSub: "Staying current and integrating the latest technologies into my projects",
       areas: [
@@ -319,6 +355,8 @@ const dict = {
       socialLabels: { github: "GitHub", linkedin: "LinkedIn", email: "Email" },
       availableTitle: "Open to new opportunities",
       availableSub: "Remote, freelance, or consulting",
+      openTo: "Open to full-stack and backend positions. Remote preferred.",
+      letsChat: "Let's talk",
     },
     footer: {
       built: "Designed with Next.js + Tailwind CSS + Framer Motion",
@@ -340,12 +378,28 @@ const dict = {
         { n: "400+", l: "API Endpoints" },
         { n: "3", l: "Piattaforme Full-Stack" },
       ],
+      terminal: {
+        line2: "sedat — full-stack developer, pensatore di sistemi, costruisco con AI",
+        journey: [
+          "gaming → server → <libertà>",
+          "ingegneria industriale → <pensiero sistemico>",
+          "rivoluzione AI → <ho fatto il cambio>",
+          "2 anni dopo → <130K+ righe di codice production>",
+        ],
+      },
     },
     about: {
       section: "CHI SONO",
       titleA: "Chi ",
       titleB: "Sono",
+      howIGotHere: "Come sono arrivato qui",
       bio: "Con una base in Ingegneria Industriale — pensiero sistematico, ottimizzazione e modellazione dei processi — costruisco sistemi software di livello produttivo. Dallo sviluppo web full-stack all'orchestrazione di agenti AI autonomi, dalle pipeline dati in tempo reale ai bot di automazione intelligente. Ogni progetto da priorita a scalabilita, affidabilita e prestazioni.",
+      paragraphs: [
+        "Ho conosciuto i computer attraverso il gaming — ma non mi limitavo a giocare. Ho esplorato i server, cercando di capire come funzionassero i sistemi. Ciò che mi ha catturato è stata la <libertà> — fai la domanda giusta al computer e c'è sempre una risposta.",
+        "Quella curiosità mi ha portato all'ingegneria industriale. Poi ho visto l'AI cambiare tutto e ho capito che una persona con gli strumenti giusti poteva costruire ciò che prima richiedeva interi team. Le possibilità sembravano di nuovo <illimitate>.",
+        "Non uso solo l'AI — costruisco con essa. LLM nella mia pipeline CI/CD, server MCP per l'orchestrazione degli strumenti, agenti autonomi che si monitorano e si riparano da soli. <Il modo in cui si costruisce il software sta cambiando, e io costruisco così dall'inizio.>",
+        "Sto ancora imparando. Ma la velocità con cui imparo è il mio punto di forza.",
+      ],
       name: "Sedat Irtas",
       role: "Full-Stack Developer",
       statusAvailable: "Disponibile",
@@ -461,6 +515,7 @@ const dict = {
         { title: "Dati & Infrastruttura", skills: ["PostgreSQL", "MongoDB", "Redis", "Docker / Compose", "Supabase", "Nginx / Deployment"] },
         { title: "AI & Automazione", skills: ["Claude AI / MCP", "Telegram Bot API", "Puppeteer / Playwright", "Pattern Matching", "Swarm Intelligence", "Cron & Scheduling"] },
       ],
+      aiNative: { title: "WORKFLOW AI-NATIVE", desc: "Claude Code per architettura e review automatica. Server MCP per l'orchestrazione degli strumenti. Agenti autonomi che si monitorano e si riparano." },
       awarenessTitle: "Apprendimento Continuo & Monitoraggio Settore",
       awarenessSub: "Rimango aggiornato e integro le ultime tecnologie nei miei progetti",
       areas: [
@@ -480,6 +535,8 @@ const dict = {
       socialLabels: { github: "GitHub", linkedin: "LinkedIn", email: "E-mail" },
       availableTitle: "Aperto a nuove opportunita",
       availableSub: "Remoto, freelance o consulenza",
+      openTo: "Aperto a posizioni full-stack e backend. Preferibilmente remoto.",
+      letsChat: "Parliamo",
     },
     footer: {
       built: "Progettato con Next.js + Tailwind CSS + Framer Motion",

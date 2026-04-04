@@ -8,6 +8,8 @@ function useTypingEffect(text: string, speed = 40, delay = 0) {
   const [displayed, setDisplayed] = useState("");
   const [done, setDone] = useState(false);
   useEffect(() => {
+    setDisplayed("");
+    setDone(false);
     const timeout = setTimeout(() => {
       let i = 0;
       const interval = setInterval(() => {
@@ -19,6 +21,24 @@ function useTypingEffect(text: string, speed = 40, delay = 0) {
     return () => clearTimeout(timeout);
   }, [text, speed, delay]);
   return { displayed, done };
+}
+
+function RichText({ text, className = "" }: { text: string; className?: string }) {
+  const colors = ["text-primary", "text-accent", "text-green"];
+  let colorIdx = 0;
+  const parts = text.split(/(<[^>]+>)/);
+  return (
+    <span className={className}>
+      {parts.map((part, i) => {
+        if (part.startsWith("<") && part.endsWith(">")) {
+          const color = colors[colorIdx % colors.length];
+          colorIdx++;
+          return <span key={i} className={color}>{part.slice(1, -1)}</span>;
+        }
+        return <span key={i}>{part}</span>;
+      })}
+    </span>
+  );
 }
 
 function Section({ id, children, className = "" }: { id: string; children: React.ReactNode; className?: string }) {
@@ -150,7 +170,7 @@ export default function Home() {
   const { t } = useLang();
 
   const line1 = useTypingEffect("$ whoami", 60, 500);
-  const line2 = useTypingEffect("sedat — full-stack developer, systems thinker, building with AI", 30, 1800);
+  const line2 = useTypingEffect(t.hero.terminal.line2, 30, 1800);
   const line3 = useTypingEffect("$ cat journey.md", 60, 4500);
 
   return (
@@ -179,10 +199,9 @@ export default function Home() {
                 {line2.done && (<><div className="h-2" /><div className="text-green">{line3.displayed}{!line3.done && <span className="terminal-cursor" />}</div></>)}
                 {line3.done && (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-muted text-xs mt-2 leading-relaxed space-y-1">
-                    <p>gaming → servers → <span className="text-primary">freedom</span></p>
-                    <p>industrial engineering → <span className="text-primary">systems thinking</span></p>
-                    <p>AI revolution → <span className="text-accent">made the switch</span></p>
-                    <p>2 years later → <span className="text-green">130K+ lines of production code</span></p>
+                    {t.hero.terminal.journey.map((line, i) => (
+                      <p key={i}><RichText text={line} /></p>
+                    ))}
                   </motion.div>
                 )}
               </div>
@@ -191,16 +210,16 @@ export default function Home() {
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 6 }} className="text-center">
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-2">
-              <span className="text-gradient">Sedat</span> <span className="text-foreground">İrtaş</span>
+              <span className="text-gradient">{t.hero.firstName}</span> <span className="text-foreground">{t.hero.lastName}</span>
             </h1>
-            <p className="text-muted text-sm mb-8">Full-Stack Developer &middot; Antalya, Turkey</p>
+            <p className="text-muted text-sm mb-8">{t.about.role} &middot; {t.about.location}</p>
 
             <div className="flex flex-wrap justify-center gap-3 mb-16">
               <a href="https://github.com/irtassedat" target="_blank" className="px-5 py-2.5 glass rounded-xl text-sm hover:border-primary/30 transition-all flex items-center gap-2">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>{t.hero.cta.github}
               </a>
               <a href="https://www.linkedin.com/in/sedat-irta%C5%9F-04a441137/" target="_blank" className="px-5 py-2.5 glass rounded-xl text-sm hover:border-primary/30 transition-all flex items-center gap-2">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>{t.hero.cta.linkedin}
               </a>
               <a href="https://dashboard-rust-chi-93.vercel.app" target="_blank" className="btn-shine px-5 py-2.5 bg-primary text-white rounded-xl text-sm hover:bg-primary-light transition-all flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-green animate-pulse" />Live Demo
@@ -208,12 +227,17 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-4 gap-3">
-              {[{ n: 130, s: "K+", l: "Lines of Code" }, { n: 400, s: "+", l: "API Endpoints" }, { n: 100, s: "+", l: "DB Models" }, { n: 11, s: "+", l: "Docker Containers" }].map(stat => (
-                <div key={stat.l} className="p-3 rounded-xl glass text-center">
-                  <div className="text-xl font-bold text-gradient"><Counter target={stat.n} suffix={stat.s} /></div>
-                  <div className="text-[9px] text-muted uppercase tracking-wider mt-1">{stat.l}</div>
-                </div>
-              ))}
+              {t.hero.stats.map(stat => {
+                const match = stat.n.match(/^(\d+)(.*)$/);
+                const num = match ? parseInt(match[1]) : 0;
+                const suffix = match ? match[2] : "";
+                return (
+                  <div key={stat.l} className="p-3 rounded-xl glass text-center">
+                    <div className="text-xl font-bold text-gradient"><Counter target={num} suffix={suffix} /></div>
+                    <div className="text-[9px] text-muted uppercase tracking-wider mt-1">{stat.l}</div>
+                  </div>
+                );
+              })}
             </div>
           </motion.div>
         </div>
@@ -224,28 +248,30 @@ export default function Home() {
       {/* ═══════ ABOUT ═══════ */}
       <Section id="about">
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <span className="text-xs font-mono text-primary tracking-wider">ABOUT</span>
-          <h2 className="text-3xl font-bold mt-2 mb-8">How I got here</h2>
+          <span className="text-xs font-mono text-primary tracking-wider">{t.about.section}</span>
+          <h2 className="text-3xl font-bold mt-2 mb-8">{t.about.howIGotHere}</h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-4 text-sm text-muted leading-relaxed">
-              <p>I got into computers through gaming — but I didn&apos;t just play. I dug into servers, tried to figure out how systems worked under the hood. What hooked me was the <span className="text-foreground">freedom</span> — ask a computer the right question and there&apos;s always an answer.</p>
-              <p>That curiosity led me to industrial engineering. Then I watched AI change everything and realized that one person with the right tools could build what used to take entire teams. The possibilities felt <span className="text-primary">limitless</span> again.</p>
-              <p>I don&apos;t just use AI — I build with it. LLMs in my CI/CD pipeline, MCP servers for tool orchestration, autonomous agents that monitor and heal themselves. <span className="text-accent">The way software gets built is changing, and I&apos;ve been building that way from the start.</span></p>
-              <p className="text-foreground font-medium">Still learning. But how fast I learn is my strongest trait.</p>
+              {t.about.paragraphs.map((p, i) => {
+                const isLast = i === t.about.paragraphs.length - 1;
+                if (isLast) return <p key={i} className="text-foreground font-medium">{p}</p>;
+                return <p key={i}><RichText text={p} /></p>;
+              })}
             </div>
             <div className="space-y-6">
               <div className="card-glow rounded-xl p-5">
-                <h3 className="text-xs font-mono text-primary mb-3">EDUCATION</h3>
+                <h3 className="text-xs font-mono text-primary mb-3">{t.about.eduTitle}</h3>
                 <div className="space-y-3">
-                  <div><p className="font-medium text-sm">Industrial Engineering</p><p className="text-xs text-muted">Süleyman Demirel University &middot; B.Sc.</p></div>
-                  <div><p className="font-medium text-sm">Full-Stack Web Development</p><p className="text-xs text-muted">Workintech Bootcamp &middot; 960 hours &middot; 78 projects</p></div>
+                  {t.about.edu.map((e, i) => (
+                    <div key={i}><p className="font-medium text-sm">{e.title}</p><p className="text-xs text-muted">{e.sub}</p></div>
+                  ))}
                 </div>
               </div>
               <div className="card-glow rounded-xl p-5">
-                <h3 className="text-xs font-mono text-primary mb-3">CURRENT FOCUS</h3>
+                <h3 className="text-xs font-mono text-primary mb-3">{t.about.focusTitle}</h3>
                 <div className="space-y-2">
-                  {["Autonomous Agent Architectures", "Real-Time Infrastructure (Docker, VPS)", "AI-Powered Development Workflows"].map(f => (
-                    <div key={f} className="flex items-center gap-2 text-sm"><span className="w-1.5 h-1.5 rounded-full bg-green" /><span className="text-muted">{f}</span></div>
+                  {t.about.focus.map(f => (
+                    <div key={f.title} className="flex items-center gap-2 text-sm"><span className="w-1.5 h-1.5 rounded-full bg-green" /><span className="text-muted">{f.title}</span></div>
                   ))}
                 </div>
               </div>
@@ -273,24 +299,19 @@ export default function Home() {
 
       {/* ═══════ TECH ═══════ */}
       <Section id="tech">
-        <span className="text-xs font-mono text-primary tracking-wider">TECH STACK</span>
-        <h2 className="text-3xl font-bold mt-2 mb-10">Tools I use</h2>
+        <span className="text-xs font-mono text-primary tracking-wider">{t.tech.section}</span>
+        <h2 className="text-3xl font-bold mt-2 mb-10">{t.tech.titleA}<span className="text-gradient">{t.tech.titleB}</span></h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {[
-            { c: "Backend", items: ["TypeScript", "Fastify", "Express", "Python", "FastAPI", "Java/Spring"] },
-            { c: "Frontend", items: ["React 19", "Next.js 15", "Tailwind 4", "Framer Motion"] },
-            { c: "Data", items: ["PostgreSQL", "Redis", "Prisma", "SQLite"] },
-            { c: "Infrastructure", items: ["Docker", "Nginx", "GitHub Actions", "Cloudflare", "Linux", "WireGuard"] },
-          ].map(g => (
-            <motion.div key={g.c} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="card-glow rounded-xl p-5">
-              <h3 className="text-xs font-mono text-primary mb-3">{g.c.toUpperCase()}</h3>
-              <div className="space-y-1.5">{g.items.map(i => <div key={i} className="text-sm text-muted hover:text-foreground transition-colors">{i}</div>)}</div>
+          {t.tech.categories.map(g => (
+            <motion.div key={g.title} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="card-glow rounded-xl p-5">
+              <h3 className="text-xs font-mono text-primary mb-3">{g.title.toUpperCase()}</h3>
+              <div className="space-y-1.5">{g.skills.map(s => <div key={s} className="text-sm text-muted hover:text-foreground transition-colors">{s}</div>)}</div>
             </motion.div>
           ))}
         </div>
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-6 p-5 rounded-xl glass border border-primary/10">
-          <span className="text-xs font-mono text-primary">AI-NATIVE WORKFLOW</span>
-          <p className="text-sm text-muted mt-2">Claude Code for architecture and automated review. MCP servers for tool orchestration. Autonomous agents that monitor and heal themselves.</p>
+          <span className="text-xs font-mono text-primary">{t.tech.aiNative.title}</span>
+          <p className="text-sm text-muted mt-2">{t.tech.aiNative.desc}</p>
         </motion.div>
       </Section>
 
@@ -299,9 +320,9 @@ export default function Home() {
       {/* ═══════ CONTACT ═══════ */}
       <Section id="contact" className="pb-32">
         <div className="text-center max-w-lg mx-auto">
-          <span className="text-xs font-mono text-primary tracking-wider">CONTACT</span>
-          <h2 className="text-3xl font-bold mt-2 mb-4">Let&apos;s talk</h2>
-          <p className="text-sm text-muted mb-8">Open to full-stack and backend positions. Remote preferred.</p>
+          <span className="text-xs font-mono text-primary tracking-wider">{t.contact.section}</span>
+          <h2 className="text-3xl font-bold mt-2 mb-4">{t.contact.letsChat}</h2>
+          <p className="text-sm text-muted mb-8">{t.contact.openTo}</p>
           <div className="flex flex-wrap justify-center gap-3">
             <a href="mailto:sedatirtas.1@gmail.com" className="btn-shine px-6 py-3 bg-primary text-white rounded-xl text-sm hover:bg-primary-light transition-all">sedatirtas.1@gmail.com</a>
             <a href="https://github.com/irtassedat/agentforge" target="_blank" className="px-6 py-3 glass rounded-xl text-sm hover:border-primary/30 transition-all">View AgentForge &rarr;</a>
@@ -309,7 +330,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <footer className="py-8 px-6 text-center"><p className="text-xs text-muted/40">Built with Next.js &middot; Tailwind CSS &middot; Framer Motion</p></footer>
+      <footer className="py-8 px-6 text-center"><p className="text-xs text-muted/40">{t.footer.built}</p></footer>
     </main>
   );
 }
