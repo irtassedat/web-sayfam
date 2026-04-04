@@ -170,3 +170,168 @@ body { background: var(--background); color: var(--foreground); font-family: var
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border), rgba(99,102,241,0.2), var(--border), transparent);
 }
+
+/* ══════════════════════════════════════════
+   3D Orbital Tech Visualization
+   ══════════════════════════════════════════ */
+
+/* Scene container — sets perspective for the 3D space */
+.orbit-scene {
+  width: 100%;
+  max-width: 660px;
+  aspect-ratio: 1;
+  perspective: 900px;
+  position: relative;
+}
+
+/* Stage — the 3D transform origin sits at center */
+.orbit-stage {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* Each orbit ring — absolute-centered, preserves 3D */
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  /* Tilt the ring so it looks like a 3D orbit */
+  transform: rotateX(var(--ring-tilt, 70deg));
+}
+
+/* The visual ring track — a circle outline */
+.orbit-track {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: var(--ring-diameter, 280px);
+  height: var(--ring-diameter, 280px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid var(--ring-color);
+  opacity: 0.12;
+}
+
+/* Wrapper for each tag — rotates around the ring center */
+.orbit-tag-wrapper {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  transform-style: preserve-3d;
+  animation: inherit;
+  /* Counter-rotation is handled inline; the wrapper just positions on the ring */
+  transform:
+    rotate(var(--tag-angle, 0deg))
+    translateX(var(--ring-radius, 140px))
+    /* Counter-rotate so text stays upright, and un-tilt */
+    rotate(calc(-1 * var(--tag-angle, 0deg)))
+    rotateX(calc(-1 * var(--ring-tilt, 70deg)));
+}
+
+/* The actual tag pill */
+.orbit-tag {
+  white-space: nowrap;
+  font-size: 10px;
+  font-family: var(--font-mono), monospace;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  color: var(--tag-color, var(--foreground));
+  background: rgba(15, 15, 20, 0.7);
+  border: 1px solid color-mix(in srgb, var(--tag-color) 25%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--tag-color) 15%, transparent);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  cursor: default;
+  backface-visibility: hidden;
+}
+.light .orbit-tag {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid color-mix(in srgb, var(--tag-color) 35%, transparent);
+}
+.orbit-tag:hover {
+  transform: translate(-50%, -50%) translateZ(30px) scale(1.12);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--tag-color) 40%, transparent);
+  background: rgba(15, 15, 20, 0.95);
+  color: #fff;
+  z-index: 100;
+}
+.light .orbit-tag:hover {
+  background: #fff;
+  color: var(--foreground);
+}
+
+/* Center element glow */
+.orbit-center-glow {
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.15), 0 0 80px rgba(99, 102, 241, 0.05);
+}
+
+/* ── Ring-specific sizes, tilts, and animation speeds ── */
+
+/* Ring 0 — Frontend (cyan) — innermost, fastest */
+.orbit-ring-0 {
+  --ring-tilt: 72deg;
+  --ring-radius: 140px;
+  --ring-diameter: 280px;
+  animation: orbit-spin 24s linear infinite;
+}
+/* Ring 1 — Backend (green) */
+.orbit-ring-1 {
+  --ring-tilt: 65deg;
+  --ring-radius: 195px;
+  --ring-diameter: 390px;
+  animation: orbit-spin 32s linear infinite reverse;
+}
+/* Ring 2 — Data (orange) */
+.orbit-ring-2 {
+  --ring-tilt: 75deg;
+  --ring-radius: 250px;
+  --ring-diameter: 500px;
+  animation: orbit-spin 40s linear infinite;
+}
+/* Ring 3 — AI (purple) — outermost, slowest */
+.orbit-ring-3 {
+  --ring-tilt: 68deg;
+  --ring-radius: 305px;
+  --ring-diameter: 610px;
+  animation: orbit-spin 48s linear infinite reverse;
+}
+
+/* The actual orbit rotation keyframe */
+@keyframes orbit-spin {
+  from { transform: rotateX(var(--ring-tilt, 70deg)) rotateZ(0deg); }
+  to   { transform: rotateX(var(--ring-tilt, 70deg)) rotateZ(360deg); }
+}
+
+/* ── Responsive: smaller on mobile ── */
+@media (max-width: 768px) {
+  .orbit-scene {
+    max-width: 380px;
+    perspective: 600px;
+  }
+  .orbit-ring-0 {
+    --ring-radius: 80px;
+    --ring-diameter: 160px;
+  }
+  .orbit-ring-1 {
+    --ring-radius: 115px;
+    --ring-diameter: 230px;
+  }
+  .orbit-ring-2 {
+    --ring-radius: 150px;
+    --ring-diameter: 300px;
+  }
+  .orbit-ring-3 {
+    --ring-radius: 185px;
+    --ring-diameter: 370px;
+  }
+  .orbit-tag {
+    font-size: 8px;
+    padding: 2px 7px;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-ring { animation-play-state: paused !important; }
+}

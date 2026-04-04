@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useLang, Lang } from "@/lib/i18n";
 import { useTheme } from "@/lib/theme";
 
@@ -221,43 +221,81 @@ export default function Home() {
   const line2 = useTypingEffect(t.hero.terminal.line2, 30, 1800);
   const line3 = useTypingEffect("$ cat journey.md", 60, 4500);
 
+  const [introComplete, setIntroComplete] = useState(false);
+  const [introHidden, setIntroHidden] = useState(false);
+
+  useEffect(() => {
+    if (line3.done && !introComplete) {
+      const timer = setTimeout(() => setIntroComplete(true), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [line3.done, introComplete]);
+
+  const handleIntroExitComplete = useCallback(() => {
+    setIntroHidden(true);
+  }, []);
+
   return (
     <main className="bg-noise">
       <motion.div className="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-primary via-accent to-primary z-[1000]" style={{ width: progressWidth }} />
 
-      {/* ═══════ HERO ═══════ */}
-      <section className="min-h-screen flex items-center justify-center px-6 bg-aurora relative">
-        <HeroControls />
-        <div className="beam-line" style={{ width: "35%", top: "20%", left: "5%", animationDelay: "0s" }} />
-        <div className="beam-line" style={{ width: "25%", top: "70%", right: "0", left: "auto", animationDelay: "2s" }} />
-
-        <div className="max-w-3xl w-full">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
-            <div className="rounded-xl overflow-hidden border border-border/50 bg-surface/80 backdrop-blur-sm">
-              <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border/30">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                  <div className="w-3 h-3 rounded-full bg-green/70" />
+      {/* ═══════ TERMINAL INTRO (fullscreen overlay) ═══════ */}
+      <AnimatePresence onExitComplete={handleIntroExitComplete}>
+        {!introComplete && (
+          <motion.div
+            key="terminal-intro"
+            className="fixed inset-0 z-[900] flex items-center justify-center px-6 bg-background"
+            exit={{ y: "-100vh", opacity: 0 }}
+            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <HeroControls />
+            <div className="max-w-3xl w-full">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <div className="rounded-xl overflow-hidden border border-border/50 bg-surface/80 backdrop-blur-sm">
+                  <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border/30">
+                    <div className="flex gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-red-500/70" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                      <div className="w-3 h-3 rounded-full bg-green/70" />
+                    </div>
+                    <span className="text-[10px] text-muted font-mono ml-2">terminal</span>
+                  </div>
+                  <div className="p-5 font-mono text-sm space-y-1.5">
+                    <div className="text-green">{line1.displayed}{!line1.done && <span className="terminal-cursor" />}</div>
+                    {line1.done && <div className="text-foreground/80">{line2.displayed}{!line2.done && <span className="terminal-cursor" />}</div>}
+                    {line2.done && (<><div className="h-2" /><div className="text-green">{line3.displayed}{!line3.done && <span className="terminal-cursor" />}</div></>)}
+                    {line3.done && (
+                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-muted text-xs mt-2 leading-relaxed space-y-1">
+                        {t.hero.terminal.journey.map((line, i) => (
+                          <p key={i}><RichText text={line} /></p>
+                        ))}
+                      </motion.div>
+                    )}
+                  </div>
                 </div>
-                <span className="text-[10px] text-muted font-mono ml-2">terminal</span>
-              </div>
-              <div className="p-5 font-mono text-sm space-y-1.5">
-                <div className="text-green">{line1.displayed}{!line1.done && <span className="terminal-cursor" />}</div>
-                {line1.done && <div className="text-foreground/80">{line2.displayed}{!line2.done && <span className="terminal-cursor" />}</div>}
-                {line2.done && (<><div className="h-2" /><div className="text-green">{line3.displayed}{!line3.done && <span className="terminal-cursor" />}</div></>)}
-                {line3.done && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-muted text-xs mt-2 leading-relaxed space-y-1">
-                    {t.hero.terminal.journey.map((line, i) => (
-                      <p key={i}><RichText text={line} /></p>
-                    ))}
-                  </motion.div>
-                )}
-              </div>
+              </motion.div>
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
 
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 6 }} className="text-center">
+      {/* ═══════ HERO ═══════ */}
+      <section className="min-h-screen flex items-center justify-center px-6 bg-aurora relative">
+        {introHidden && <HeroControls />}
+        {introHidden && (
+          <>
+            <div className="beam-line" style={{ width: "35%", top: "20%", left: "5%", animationDelay: "0s" }} />
+            <div className="beam-line" style={{ width: "25%", top: "70%", right: "0", left: "auto", animationDelay: "2s" }} />
+          </>
+        )}
+
+        <div className="max-w-3xl w-full">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={introHidden ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="text-center"
+          >
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-2">
               <span className="text-gradient">{t.hero.firstName}</span> <span className="text-foreground">{t.hero.lastName}</span>
             </h1>
@@ -350,14 +388,69 @@ export default function Home() {
       <Section id="tech">
         <span className="text-xs font-mono text-primary tracking-wider">{t.tech.section}</span>
         <h2 className="text-3xl font-bold mt-2 mb-10">{t.tech.titleA}<span className="text-gradient">{t.tech.titleB}</span></h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {t.tech.categories.map(g => (
-            <motion.div key={g.title} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="card-glow rounded-xl p-5">
-              <h3 className="text-xs font-mono text-primary mb-3">{g.title.toUpperCase()}</h3>
-              <div className="space-y-1.5">{g.skills.map(s => <div key={s} className="text-sm text-muted hover:text-foreground transition-colors">{s}</div>)}</div>
+        {/* ── 3D Orbital Tech Visualization ── */}
+        {(() => {
+          const categoryColors = ["#06b6d4", "#22c55e", "#f59e0b", "#a855f7"];
+          const animClasses = ["orbit-ring-0", "orbit-ring-1", "orbit-ring-2", "orbit-ring-3"];
+          return (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative mx-auto"
+            >
+              {/* Center element */}
+              <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                <div className="orbit-center-glow w-16 h-16 md:w-20 md:h-20 rounded-full bg-surface border border-border/50 flex items-center justify-center">
+                  <span className="text-lg md:text-xl font-bold text-gradient">SI</span>
+                </div>
+              </div>
+
+              {/* Orbit scene */}
+              <div className="orbit-scene mx-auto">
+                <div className="orbit-stage">
+                  {t.tech.categories.map((cat, catIdx) => {
+                    const color = categoryColors[catIdx];
+                    return (
+                      <div
+                        key={cat.title}
+                        className={`orbit-ring ${animClasses[catIdx]}`}
+                        style={{ "--ring-color": color } as React.CSSProperties}
+                      >
+                        <div className="orbit-track" />
+                        {cat.skills.map((skill, skillIdx) => {
+                          const angle = (360 / cat.skills.length) * skillIdx;
+                          return (
+                            <div
+                              key={skill}
+                              className="orbit-tag-wrapper"
+                              style={{ "--tag-angle": `${angle}deg` } as React.CSSProperties}
+                            >
+                              <div className="orbit-tag" style={{ "--tag-color": color } as React.CSSProperties}>
+                                {skill}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Category legend */}
+              <div className="flex flex-wrap justify-center gap-3 md:gap-5 mt-6">
+                {t.tech.categories.map((cat, i) => (
+                  <div key={cat.title} className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: categoryColors[i], boxShadow: `0 0 8px ${categoryColors[i]}50` }} />
+                    <span className="text-[10px] md:text-xs text-muted font-mono">{cat.title}</span>
+                  </div>
+                ))}
+              </div>
             </motion.div>
-          ))}
-        </div>
+          );
+        })()}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-6 p-5 rounded-xl glass border border-primary/10">
           <span className="text-xs font-mono text-primary">{t.tech.aiNative.title}</span>
           <p className="text-sm text-muted mt-2">{t.tech.aiNative.desc}</p>
