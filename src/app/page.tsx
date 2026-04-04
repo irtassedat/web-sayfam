@@ -217,7 +217,7 @@ function MoreProjects({ t }: { t: ReturnType<typeof useLang>["t"] }) {
   const [expanded, setExpanded] = useState(false);
 
   const extraProjects = [
-    { title: t.projects.items[1]?.title ?? "E-Commerce Platform", desc: t.projects.items[1]?.desc ?? "", metrics: "Full-Stack", tags: ["React", "Redux", "Java", "Spring Boot", "PostgreSQL"], github: "https://github.com/irtassedat/ecommerce", color: "#ef4444" },
+    { title: t.projects.items[1]?.title ?? "E-Commerce Platform", desc: t.projects.items[1]?.desc ?? "", metrics: "Full-Stack", tags: ["React", "Redux", "Java", "Spring Boot", "PostgreSQL"], github: "https://github.com/irtassedat/ecommerce", live: "https://ecommerce-flax-seven-47.vercel.app", color: "#ef4444" },
     { title: t.projects.items[3]?.title ?? "Real-Time Data Platform", desc: t.projects.items[3]?.desc ?? "", metrics: "Real-Time", tags: ["Python", "WebSocket", "Redis", "PostgreSQL", "Docker"], color: "#6366f1" },
     { title: t.projects.items[5]?.title ?? "Data Pipeline", desc: t.projects.items[5]?.desc ?? "", metrics: "Multi-Source", tags: ["TypeScript", "REST API", "Playwright", "Docker"], color: "#10b981" },
     { title: t.projects.items[6]?.title ?? "Predictive Analytics", desc: t.projects.items[6]?.desc ?? "", metrics: "Full-Stack + Bot", tags: ["React", "Node.js", "PostgreSQL", "Telegram Bot"], color: "#14b8a6" },
@@ -308,12 +308,15 @@ export default function Home() {
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
           >
             <HeroControls />
-            <button
+            <motion.button
               onClick={() => setIntroComplete(true)}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[11px] text-muted/30 hover:text-muted/70 transition-colors font-mono tracking-wider"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2 }}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg text-xs text-muted/60 hover:text-foreground border border-border/30 hover:border-primary/40 hover:bg-primary/5 transition-all font-mono tracking-wider"
             >
               skip intro &rarr;
-            </button>
+            </motion.button>
             <div className="max-w-3xl w-full">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <div className="rounded-xl overflow-hidden border border-border/50 bg-surface/80 backdrop-blur-sm">
