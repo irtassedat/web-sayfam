@@ -1,19 +1,92 @@
 "use client";
 
+import { useState } from "react";
+
+const t = {
+  en: {
+    download: "Download PDF", back: "Back to Portfolio", profile: "Profile",
+    profileText: "I got into computers through gaming — but I didn\u2019t just play. I took apart servers, tried to figure out how systems worked. What hooked me was this: ask the right question, there\u2019s always an answer. That feeling never left \u2014 it carried me from industrial engineering to software. Since late 2023, I\u2019ve written 130K+ lines of production code, built 6 autonomous agents, and run 24/7 infrastructure. AI-powered development tools are part of my daily workflow.",
+    experience: "Professional Experience", freelanceTitle: "Freelance Full-Stack Developer",
+    freelanceSub: "AI-Powered Development \u00B7 Autonomous Systems \u00B7 DevOps",
+    prometeonSub: "Intern \u2014 Industrial Engineer \u00B7 R&D",
+    prometeonBullet: "R&D financial reporting, machine test data analysis, executive presentations",
+    projects: "Projects", education: "Education", skills: "Technical Skills", infra: "Live Infrastructure",
+    languages: "Languages", certs: "Certificates", iedev: "IE + Developer",
+    iedevText: "In engineering I learned to break down systems and find bottlenecks. I do the same in software \u2014 I can\u2019t help but take apart every system I see. Old habit.",
+    turkish: "Turkish", native: "Native", english: "English", advanced: "Advanced (B2-C1)",
+    german: "German", beginner: "Beginner (A1)",
+    metrics: [
+      { num: "4", label: "Live Platforms" }, { num: "400+", label: "API Endpoints" },
+      { num: "100+", label: "DB Models" }, { num: "11", label: "Docker Containers" },
+      { num: "6", label: "Autonomous Agents" }, { num: "7", label: "Delivered Sites" },
+    ],
+    bullets: [
+      "Claude Code + MCP Server custom dev toolchain; Cursor & Copilot integrated AI-assisted full-stack workflow",
+      "Production APIs with Fastify 5, Next.js 16, FastAPI, Spring Boot; PostgreSQL 16, Redis 7, Prisma ORM (100+ models, 70+ indexes)",
+      "6 autonomous agent systems: payment verification, inventory tracking, notifications, workflow orchestration, DLQ retry, Signal sync",
+      "Claude Haiku Vision AI pipeline, Gemini 2.0 Flash NLG, MCP Server integrations \u2014 AI agent/automation scenarios",
+      "Docker Compose 11 containers, Nginx reverse proxy, Cloudflare CDN, Tailscale VPN \u2014 Ubuntu VPS 24/7 production",
+      "Prototype \u2192 MVP \u2192 Production fast iteration: 7 portfolio/company sites delivered, Yandex #1 organic ranking",
+    ],
+    edu1: "Industrial Engineering", edu1sub: "Process optimization, capacity planning, statistical modeling, lean manufacturing",
+    edu2: "Full-Stack Web Dev.", edu2sub: "React, Node.js, Java/Spring Boot, PostgreSQL, REST API, Git",
+    p1: { name: "Real-Time Community Platform", b: ["164 REST endpoints, 29 Prisma models, JWT + Argon2, gamification engine (points/rewards/lottery/referral)", "Python Telegram bot (12 handlers), Claude AI chatbot, autonomous monitoring agent (13 tasks: uptime, SEO audit, traffic)", "5 Docker containers, SSE notifications, IndexNow SEO, live production platform, Yandex #1 organic ranking"] },
+    p2: { name: "Smart Logistics & Payment Platform", b: ["6 autonomous agents: Payment (auto-verify), Order (lifecycle), Inventory (stock predict), Notification, Signal, Workflow + DLQ Retry", "Automatic payment verification, multi-payment support, 72-hour dispute resolution, 25 Prisma models, geo queries"] },
+    p3: { name: "Multi-Module Bot & AI Ecosystem", b: ["4 microservices: Admin Dashboard (FastAPI + 39 templates + SSE), Verification Bot, Autopost Bot, Member Bot", "Gemini AI integration (key rotation, rate limiting), ML security: Isolation Forest, fraud detection, 31 tables, 70+ indexes"] },
+    p4: { name: "Autonomous Data Collection & AI Vision", b: ["24/7 autonomous scraping pipeline, Claude Haiku Vision image recognition, result verification, 86 source tracking, SOCKS5 proxy rotation"] },
+    p5: { name: "QR Menu SaaS Platform", b: ["184 endpoints, 46 tables, 5-tier RBAC, JSONB theme engine, 4-tier loyalty program, SMS OTP, multi-branch management"] },
+    p6: { name: "E-Commerce Platform (Full-Stack)", b: ["Product catalog, cart, payment frontend + RESTful backend API, Spring Data JPA, stock/order management"] },
+  },
+  tr: {
+    download: "PDF Olarak İndir", back: "Portfolyoya Dön", profile: "Profil",
+    profileText: "Bilgisayarlarla oyun üzerinden tanıştım ama sadece oynamadım — sunucuları kurcaladım, sistemlerin nasıl çalıştığını çözmeye çalıştım. Bu merak beni endüstri mühendisliğine, oradan yazılıma taşıdı. Yazılımı ne kadar hızlı öğrendiğim en güçlü özelliğim.",
+    experience: "Profesyonel Deneyim", freelanceTitle: "Freelance Full-Stack Developer",
+    freelanceSub: "Full-Stack \u00B7 AI Otomasyon \u00B7 DevOps \u00B7 Otonom Sistemler",
+    prometeonSub: "Stajyer \u2014 Endüstri Mühendisi \u00B7 Ar-Ge",
+    prometeonBullet: "Ar-Ge finansal raporlama, makine test verisi analizi, üst yönetime sunum hazırlama",
+    projects: "Projeler", education: "Eğitim", skills: "Teknik Yetkinlikler", infra: "Canlı Altyapı",
+    languages: "Diller", certs: "Sertifikalar", iedev: "IE + Developer",
+    iedevText: "Mühendislikte sistemi parçalayıp darboğazı bulmayı öğrendim, yazılımda da aynısını yapıyorum. Bir sistemi gördüğümde elimde olmadan söküp inceliyorum — eski alışkanlık.",
+    turkish: "Türkçe", native: "Anadil", english: "İngilizce", advanced: "İleri (B2-C1)",
+    german: "Almanca", beginner: "Başlangıç (A1)",
+    metrics: [
+      { num: "4", label: "Canlı Platform" }, { num: "400+", label: "API Endpoint" },
+      { num: "100+", label: "DB Modeli" }, { num: "11", label: "Docker Container" },
+      { num: "6", label: "Otonom Ajan" }, { num: "7", label: "Teslim Edilen Site" },
+    ],
+    bullets: [
+      "Claude Code + MCP Server ile custom development toolchain; Cursor ve Copilot entegrasyonlu AI-assisted workflow",
+      "Fastify 5, Next.js 16, FastAPI, Spring Boot ile production API mimarileri; PostgreSQL 16, Redis 7, Prisma ORM (100+ model, 70+ index)",
+      "6 otonom ajan: ödeme doğrulama, envanter takibi, bildirim yönetimi, workflow orkestrasyon, DLQ retry, Signal senkronizasyon",
+      "Claude Haiku Vision AI pipeline, Gemini 2.0 Flash doğal dil üretimi, MCP Server entegrasyonları",
+      "Docker Compose 11 container, Nginx reverse proxy, Cloudflare CDN, Tailscale VPN — Ubuntu VPS 7/24 production yönetimi",
+      "Prototip → MVP → Production hızlı iterasyon: 7 site teslim, Yandex #1 organik sıralama",
+    ],
+    edu1: "Endüstri Mühendisliği", edu1sub: "Süreç optimizasyonu, kapasite planlama, istatistiksel modelleme, yalın üretim",
+    edu2: "Full-Stack Web Dev.", edu2sub: "React, Node.js, Java/Spring Boot, PostgreSQL, REST API, Git",
+    p1: { name: "Gerçek Zamanlı Topluluk Platformu", b: ["164 REST endpoint, 29 Prisma modeli, JWT + Argon2, gamifikasyon motoru (puan/ödül/çekiliş/referral)", "Python Telegram bot (12 handler), Claude AI chatbot, otonom monitoring agent (13 görev: uptime, SEO audit, trafik analiz)", "5 Docker container, SSE bildirim, IndexNow SEO, canlı production platform, Yandex #1 organik sıralama"] },
+    p2: { name: "Akıllı Lojistik & Ödeme Platformu", b: ["6 otonom ajan: Payment (otomatik doğrulama), Order (yaşam döngüsü), Inventory (stok tahmin), Notification, Signal, Workflow + DLQ Retry", "Otomatik ödeme doğrulama, çoklu ödeme yöntemi, 72 saat anlaşmazlık çözüm mekanizması, 25 Prisma modeli, coğrafi sorgulama"] },
+    p3: { name: "Çok Modüllü Bot & AI Ekosistemi", b: ["4 mikro servis: Admin Dashboard (FastAPI + 39 template + SSE), Verification Bot, Autopost Bot, Member Bot", "Gemini AI entegrasyonu (key rotation, rate limiting), ML güvenlik: Isolation Forest, fraud detection, 31 tablo, 70+ index"] },
+    p4: { name: "Otonom Veri Toplama & AI Vision Sistemi", b: ["7/24 otonom scraping pipeline, Claude Haiku Vision ile görüntü tanıma, sonuç doğrulama, 86 kaynak takibi, SOCKS5 proxy rotasyonu"] },
+    p5: { name: "QR Menü SaaS Platformu", b: ["184 endpoint, 46 tablo, 5 kademeli RBAC, JSONB tema motoru, 4 tier sadakat programı, SMS OTP, çoklu şube yönetimi"] },
+    p6: { name: "E-Ticaret Platformu (Full-Stack)", b: ["Ürün katalog, sepet, ödeme frontend + RESTful backend API, Spring Data JPA, stok/sipariş yönetimi"] },
+  },
+};
+
 export default function CVContent() {
+  const [lang, setLang] = useState<"en" | "tr">("en");
+  const c = t[lang];
+
   return (
     <div className="min-h-screen bg-gray-100 print:bg-white">
-      {/* Print Button */}
-      <div className="print:hidden fixed top-4 right-4 z-50 flex gap-3">
-        <button
-          onClick={() => window.print()}
-          className="px-5 py-2.5 bg-sky-600 text-white text-sm font-medium rounded-lg hover:bg-sky-700 transition-colors shadow-lg cursor-pointer"
-        >
-          PDF Olarak İndir
-        </button>
-        <a href="/" className="px-5 py-2.5 bg-gray-800 text-white text-sm font-medium rounded-lg hover:bg-gray-900 transition-colors shadow-lg">
-          Portfolyoya Dön
-        </a>
+      {/* Top Buttons */}
+      <div className="print:hidden fixed top-4 right-4 z-50 flex gap-2">
+        <div className="flex rounded-lg overflow-hidden border border-gray-300 shadow-lg">
+          <button onClick={() => setLang("en")} className={`px-3 py-2 text-xs font-mono transition-all ${lang === "en" ? "bg-sky-600 text-white" : "bg-white text-gray-600 hover:bg-gray-100"}`}>EN</button>
+          <button onClick={() => setLang("tr")} className={`px-3 py-2 text-xs font-mono transition-all ${lang === "tr" ? "bg-sky-600 text-white" : "bg-white text-gray-600 hover:bg-gray-100"}`}>TR</button>
+        </div>
+        <button onClick={() => window.print()} className="px-5 py-2 bg-sky-600 text-white text-sm font-medium rounded-lg hover:bg-sky-700 transition-colors shadow-lg cursor-pointer">{c.download}</button>
+        <a href="/" className="px-5 py-2 bg-gray-800 text-white text-sm font-medium rounded-lg hover:bg-gray-900 transition-colors shadow-lg">{c.back}</a>
       </div>
 
       {/* A4 Container */}
@@ -64,14 +137,7 @@ export default function CVContent() {
         {/* ══════════ METRICS ══════════ */}
         <div className="px-7 pt-2.5 pb-0 print:pt-2">
           <div className="grid grid-cols-6 gap-1.5">
-            {[
-              { num: "4", label: "Canlı Platform" },
-              { num: "400+", label: "API Endpoint" },
-              { num: "100+", label: "DB Modeli" },
-              { num: "11", label: "Docker Container" },
-              { num: "6", label: "Otonom Ajan" },
-              { num: "7", label: "Teslim Edilen Site" },
-            ].map((m) => (
+            {c.metrics.map((m) => (
               <div key={m.label} className="text-center py-1.5 rounded-lg bg-gradient-to-b from-slate-50 to-white border border-slate-100">
                 <div className="text-[13px] font-bold text-sky-700">{m.num}</div>
                 <div className="text-[7px] text-slate-400 font-medium uppercase tracking-wide leading-tight">{m.label}</div>
@@ -89,115 +155,87 @@ export default function CVContent() {
 
               {/* PROFIL */}
               <section>
-                <SectionTitle icon="user">Profil</SectionTitle>
-                <p className="text-[9.5px] text-gray-600 leading-relaxed print:text-[9px]">
-                  Bilgisayarlarla oyun üzerinden tanıştım ama sadece oynamadım — sunucuları kurcaladım,
-                  sistemlerin nasıl çalıştığını çözmeye çalıştım. Bu merak beni endüstri mühendisliğine,
-                  oradan yazılıma taşıdı. Yazılımı ne kadar hızlı öğrendiğim en güçlü özelliğim.
-                </p>
+                <SectionTitle icon="user">{c.profile}</SectionTitle>
+                <p className="text-[9.5px] text-gray-600 leading-relaxed print:text-[9px]">{c.profileText}</p>
               </section>
 
               {/* DENEYİM */}
               <section>
-                <SectionTitle icon="briefcase">Profesyonel Deneyim</SectionTitle>
+                <SectionTitle icon="briefcase">{c.experience}</SectionTitle>
                 <div className="mb-1.5">
                   <div className="flex items-start justify-between">
                     <div>
                       <h3 className="text-[10.5px] font-bold text-gray-900">Freelance Full-Stack Developer</h3>
-                      <p className="text-[8.5px] text-sky-600 font-semibold">Full-Stack · AI Otomasyon · DevOps · Otonom Sistemler</p>
+                      <p className="text-[8.5px] text-sky-600 font-semibold">{c.freelanceSub}</p>
                     </div>
-                    <DateBadge>2024 – Günümüz</DateBadge>
+                    <DateBadge>{lang === "en" ? "2024 – Present" : "2024 – Günümüz"}</DateBadge>
                   </div>
                   <ul className="mt-1 space-y-[2px]">
-                    <BulletItem>Fastify 5, Next.js 16, FastAPI, Spring Boot ile production API mimarileri; PostgreSQL 16, Redis 7, Prisma ORM ile 100+ model, 70+ index</BulletItem>
-                    <BulletItem>Claude Haiku Vision AI ile görüntü tanıma pipeline&apos;ı, Gemini 2.0 Flash ile doğal dil üretimi, MCP Server entegrasyonları</BulletItem>
-                    <BulletItem>6 otonom ajan: ödeme doğrulama, envanter takibi, bildirim yönetimi, workflow orkestrasyon, DLQ retry, Signal senkronizasyon</BulletItem>
-                    <BulletItem>Docker Compose ile 11 container, Nginx reverse proxy, Cloudflare CDN, Tailscale VPN — Ubuntu VPS üzerinde 7/24 production yönetimi</BulletItem>
-                    <BulletItem>Isolation Forest ile anomali tespiti, kural tabanlı risk skorlama, IP/username/clientID dedup, multi-brand veri izolasyonu</BulletItem>
-                    <BulletItem>Otonom SEO monitoring: canonical/meta tag validasyon, broken link tespiti, dinamik sitemap, IndexNow entegrasyonu, Yandex/Google sıralama takibi</BulletItem>
+                    {c.bullets.map((b, i) => <BulletItem key={i}>{b}</BulletItem>)}
                   </ul>
                 </div>
                 <div>
                   <div className="flex items-start justify-between">
                     <div>
                       <h3 className="text-[10.5px] font-bold text-gray-900">Prometeon Tyre Group, Kocaeli</h3>
-                      <p className="text-[8.5px] text-sky-600 font-semibold">Stajyer — Endüstri Mühendisi · Ar-Ge</p>
+                      <p className="text-[8.5px] text-sky-600 font-semibold">{c.prometeonSub}</p>
                     </div>
                     <DateBadge>2022</DateBadge>
                   </div>
                   <ul className="mt-1 space-y-[2px]">
-                    <BulletItem>Ar-Ge finansal raporlama, makine test verisi analizi, üst yönetime sunum hazırlama</BulletItem>
+                    <BulletItem>{c.prometeonBullet}</BulletItem>
                   </ul>
                 </div>
               </section>
 
               {/* PROJELER */}
               <section>
-                <SectionTitle icon="folder">Projeler</SectionTitle>
+                <SectionTitle icon="folder">{c.projects}</SectionTitle>
                 <div className="space-y-1.5 print:space-y-1">
 
                   <ProjectItem
-                    name="Gerçek Zamanlı Topluluk Platformu"
+                    name={c.p1.name}
                     lines="64.900"
                     stack="Fastify 5 · Next.js 15 · React 19 · PostgreSQL 16 · Redis 7 · Python · Docker"
-                    bullets={[
-                      "164 REST endpoint, 29 Prisma modeli, JWT + Argon2, gamifikasyon motoru (puan/ödül/çekiliş/ticket event/referral)",
-                      "Python Telegram bot (12 handler), Claude AI chatbot, otonom monitoring agent (13 görev: uptime, SEO audit, trafik analiz)",
-                      "5 Docker container, SSE bildirim, IndexNow SEO, canlı production platform, Yandex #1 organik sıralama",
-                    ]}
+                    bullets={c.p1.b}
                   />
 
                   <ProjectItem
-                    name="Akıllı Lojistik & Ödeme Platformu"
+                    name={c.p2.name}
                     lines="34.600"
                     stack="pnpm Monorepo · Fastify · React · Grammy · Prisma · Signal API · Docker (7 servis)"
-                    bullets={[
-                      "6 otonom ajan: Payment (otomatik doğrulama), Order (yaşam döngüsü), Inventory (stok tahmin), Notification, Signal, Workflow + DLQ Retry",
-                      "Otomatik ödeme doğrulama sistemi, çoklu ödeme yöntemi desteği, 72 saat anlaşmazlık çözüm mekanizması",
-                      "Grammy Telegram bot (11 komut), React MiniApp (WebApp), 25 Prisma modeli, coğrafi sorgulama, çoklu marka izolasyonu",
-                    ]}
+                    bullets={c.p2.b}
                   />
 
                   <ProjectItem
-                    name="Çok Modüllü Bot & AI Ekosistemi"
+                    name={c.p3.name}
                     lines="26.469"
                     stack="Python 3.11 · FastAPI · Gemini 2.0 Flash · Telethon · python-telegram-bot · SQLite"
-                    bullets={[
-                      "4 mikro servis: Admin Dashboard (FastAPI + 39 Jinja2 template + SSE), Verification Bot, Autopost Bot, Member Bot",
-                      "Gemini AI canlı sohbet üretimi (API key rotation, rate limiting), akıllı kupon generator, mesaj harvesting, grup keşfi",
-                      "ML güvenlik: Isolation Forest, adaptive scoring, fraud detection (IP/username/clientID dedup), 31 tablo, 70+ index, multi-brand izolasyon",
-                    ]}
+                    bullets={c.p3.b}
                   />
 
                   <ProjectItem
-                    name="Otonom Veri Toplama & AI Vision Sistemi"
+                    name={c.p4.name}
                     lines="5.000+"
                     stack="FastAPI · Playwright · Claude Haiku Vision · PostgreSQL · Docker"
-                    bullets={[
-                      "7/24 otonom scraping pipeline (35dk döngü), Claude Haiku Vision ile görüntü tanıma, sonuç doğrulama, sıralama sistemi",
-                      "86 kaynak takibi, 428+ veri noktası, otomatik başlatma, Playwright headless tarayıcı, SOCKS5 proxy rotasyonu",
-                    ]}
+                    bullets={c.p4.b}
                   />
 
                   <ProjectItem
-                    name="QR Menü SaaS Platformu"
+                    name={c.p5.name}
                     lines="12.685"
                     stack="Node.js · Express · PostgreSQL · JWT · bcrypt · NETGSM"
                     github="github.com/irtassedat/qrmenu"
                     live="qr.sebastianlogic.com/menu/29"
-                    bullets={[
-                      "184 endpoint, 46 tablo, 5 kademeli RBAC, JSONB tema motoru, 4 tier sadakat programı, SMS OTP (NETGSM), çoklu şube",
-                    ]}
+                    bullets={c.p5.b}
                   />
 
                   <ProjectItem
-                    name="E-Ticaret Platformu (Full-Stack)"
+                    name={c.p6.name}
                     lines="—"
                     stack="React · Redux · Java Spring Boot · Spring Security · JPA · PostgreSQL"
                     github="github.com/irtassedat/ecommerce"
-                    bullets={[
-                      "Ürün katalog, sepet, ödeme frontend + RESTful backend API, Spring Data JPA, stok/sipariş yönetimi",
-                    ]}
+                    bullets={c.p6.b}
                   />
                 </div>
               </section>
@@ -208,14 +246,14 @@ export default function CVContent() {
 
               {/* EĞİTİM */}
               <section>
-                <SectionTitle icon="graduation">Eğitim</SectionTitle>
+                <SectionTitle icon="graduation">{c.education}</SectionTitle>
                 <div className="space-y-1.5">
                   <div className="pl-2 border-l-2 border-sky-300">
                     <h3 className="text-[10px] font-bold text-gray-900">Süleyman Demirel Üni.</h3>
-                    <p className="text-[8.5px] text-sky-600 font-semibold">Endüstri Mühendisliği</p>
+                    <p className="text-[8.5px] text-sky-600 font-semibold">{c.edu1}</p>
                     <p className="text-[7.5px] text-gray-400">2017 – 2024</p>
                     <p className="text-[7.5px] text-gray-500 mt-0.5 leading-snug">
-                      Süreç optimizasyonu, kapasite planlama, kuyruk teorisi, yalın üretim, istatistiksel modelleme
+                      {c.edu1sub}
                     </p>
                   </div>
                   <div className="pl-2 border-l-2 border-sky-300">
@@ -223,7 +261,7 @@ export default function CVContent() {
                     <p className="text-[8.5px] text-sky-600 font-semibold">Full-Stack Web Dev.</p>
                     <p className="text-[7.5px] text-gray-400">2023 – 2024 · 960 saat · 78 proje</p>
                     <p className="text-[7.5px] text-gray-500 mt-0.5 leading-snug">
-                      React, Node.js, Java/Spring Boot, PostgreSQL, REST API, Git
+                      {c.edu2sub}
                     </p>
                   </div>
                 </div>
@@ -231,7 +269,7 @@ export default function CVContent() {
 
               {/* TEKNİK BECERİLER */}
               <section>
-                <SectionTitle icon="chip">Teknik Yetkinlikler</SectionTitle>
+                <SectionTitle icon="chip">{c.skills}</SectionTitle>
                 <div className="space-y-1">
                   <SkillGroup label="Frontend" items={["React 19", "Next.js 16", "TypeScript", "Tailwind 4", "Framer Motion"]} />
                   <SkillGroup label="Backend" items={["Fastify 5", "Express", "FastAPI", "Spring Boot", "Prisma"]} />
@@ -244,7 +282,7 @@ export default function CVContent() {
 
               {/* ALTYAPI */}
               <section>
-                <SectionTitle icon="server">Canlı Altyapı</SectionTitle>
+                <SectionTitle icon="server">{c.infra}</SectionTitle>
                 <div className="rounded-lg bg-gradient-to-b from-slate-50 to-white border border-slate-100 p-2">
                   <div className="grid grid-cols-2 gap-1.5 text-center">
                     <div>
@@ -257,24 +295,24 @@ export default function CVContent() {
                     </div>
                   </div>
                   <p className="text-[7.5px] text-gray-500 mt-1.5 leading-snug">
-                    Ubuntu 24.04 VPS, Tailscale VPN, 7/24 uptime monitoring, health check, otomatik yeniden başlatma
+                    {lang === "en" ? "Ubuntu 24.04 VPS, Tailscale VPN, 24/7 uptime monitoring, health check, auto-restart" : "Ubuntu 24.04 VPS, Tailscale VPN, 7/24 uptime monitoring, health check, otomatik yeniden başlatma"}
                   </p>
                 </div>
               </section>
 
               {/* DİLLER */}
               <section>
-                <SectionTitle icon="globe">Diller</SectionTitle>
+                <SectionTitle icon="globe">{c.languages}</SectionTitle>
                 <div className="space-y-1">
-                  <LangItem lang="Türkçe" level="Anadil" pct={100} />
-                  <LangItem lang="İngilizce" level="İleri (B2-C1)" pct={75} />
-                  <LangItem lang="Almanca" level="Başlangıç (A1)" pct={15} />
+                  <LangItem lang={c.turkish} level={c.native} pct={100} />
+                  <LangItem lang={c.english} level={c.advanced} pct={75} />
+                  <LangItem lang={c.german} level={c.beginner} pct={15} />
                 </div>
               </section>
 
               {/* SERTİFİKALAR */}
               <section>
-                <SectionTitle icon="award">Sertifikalar</SectionTitle>
+                <SectionTitle icon="award">{c.certs}</SectionTitle>
                 <div className="space-y-0.5">
                   <CertItem name="Front End Development" org="Workintech · 2023" />
                   <CertItem name="Full Stack Development" org="Workintech · 2024" />
@@ -286,8 +324,7 @@ export default function CVContent() {
               <section>
                 <SectionTitle icon="puzzle">IE + Developer</SectionTitle>
                 <p className="text-[8px] text-gray-600 leading-snug">
-                  Mühendislikte sistemi parçalayıp darboğazı bulmayı öğrendim, yazılımda da aynısını yapıyorum.
-                  Bir sistemi gördüğümde elimde olmadan söküp inceliyorum — eski alışkanlık.
+                  {c.iedevText}
                 </p>
               </section>
             </div>
