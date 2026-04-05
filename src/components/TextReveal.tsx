@@ -16,6 +16,13 @@ export function StaggerText({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => { setIsMounted(true); }, []);
+
+  if (!isMounted) {
+    return <span ref={ref} className={className}>{text}</span>;
+  }
 
   return (
     <span ref={ref} className={className}>
@@ -48,7 +55,15 @@ export function WordReveal({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => { setIsMounted(true); }, []);
+
   const words = text.split(" ");
+
+  if (!isMounted) {
+    return <span ref={ref} className={className}>{text}</span>;
+  }
 
   return (
     <span ref={ref} className={className}>
@@ -132,7 +147,11 @@ export function CountUp({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(target);
+
+  useEffect(() => {
+    setCount(0);
+  }, []);
 
   useEffect(() => {
     if (!isInView) return;

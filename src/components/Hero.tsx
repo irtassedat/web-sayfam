@@ -4,6 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useLang } from "@/lib/i18n";
 
+function useIsMounted() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  return mounted;
+}
+
 const terminalLines = [
   { cmd: "$ agentforge start --mode production", delay: 0 },
   { out: "  Starting 6 agents...", delay: 1200 },
@@ -82,6 +88,7 @@ export default function Hero() {
   const { t } = useLang();
   const [roleIndex, setRoleIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -104,7 +111,7 @@ export default function Hero() {
       <div className="relative z-10 w-full max-w-4xl">
         {/* Name + Title */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={isMounted ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
@@ -132,7 +139,7 @@ export default function Hero() {
 
         {/* Terminal */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={isMounted ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
           className="mb-12"
@@ -142,7 +149,7 @@ export default function Hero() {
 
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={isMounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
           className="flex flex-wrap justify-center gap-3 mb-16"
@@ -166,7 +173,7 @@ export default function Hero() {
 
         {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={isMounted ? { opacity: 0, y: 15 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.3 }}
           className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto"
@@ -174,7 +181,7 @@ export default function Hero() {
           {t.hero.stats.map((s, i) => (
             <motion.div
               key={s.l}
-              initial={{ opacity: 0, y: 15 }}
+              initial={isMounted ? { opacity: 0, y: 15 } : false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4 + i * 0.1 }}
               className="text-center p-4 rounded-xl glass"
@@ -188,7 +195,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={isMounted ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"

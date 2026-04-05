@@ -5,6 +5,12 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useLang, Lang } from "@/lib/i18n";
 import { useTheme } from "@/lib/theme";
 
+function useIsMounted() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  return mounted;
+}
+
 const langOptions: { key: Lang; label: string }[] = [
   { key: "tr", label: "TR" },
   { key: "en", label: "EN" },
@@ -14,9 +20,10 @@ const langOptions: { key: Lang; label: string }[] = [
 function HeroControls() {
   const { lang, setLang } = useLang();
   const { theme, toggleTheme } = useTheme();
+  const mounted = useIsMounted();
   return (
     <motion.div
-      initial={{ opacity: 0 }}
+      initial={mounted ? { opacity: 0 } : false}
       animate={{ opacity: 1 }}
       transition={{ delay: 1, duration: 0.5 }}
       className="absolute top-6 right-6 z-50 flex items-center gap-2"
@@ -98,9 +105,14 @@ function Section({ id, children, className = "" }: { id: string; children: React
 }
 
 function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(target);
+  const [animated, setAnimated] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const [triggered, setTriggered] = useState(false);
+
+  useEffect(() => {
+    setCount(0);
+  }, []);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -118,7 +130,7 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
     let current = 0;
     const interval = setInterval(() => {
       current += increment;
-      if (current >= target) { setCount(target); clearInterval(interval); }
+      if (current >= target) { setCount(target); setAnimated(true); clearInterval(interval); }
       else setCount(Math.floor(current));
     }, 50);
     return () => clearInterval(interval);
@@ -127,10 +139,11 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-function ProjectCard({ title, description, metrics, tags, github, live, color, delay, preview }: {
+function ProjectCard({ title, description, metrics, tags, github, live, color, delay: animDelay, preview }: {
   title: string; description: string; metrics: string; tags: string[];
   github?: string; live?: string; color: string; delay: number; preview?: string;
 }) {
+  const isMounted = useIsMounted();
   const handleCardClick = () => {
     if (live?.includes("sebastianlogic")) {
       window.open(live, "_blank", "width=420,height=880,menubar=no,toolbar=no,location=no,status=no");
@@ -148,10 +161,10 @@ function ProjectCard({ title, description, metrics, tags, github, live, color, d
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={isMounted ? { opacity: 0, y: 30 } : false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ delay, duration: 0.5, ease: "easeOut" }}
+      transition={{ delay: animDelay, duration: 0.5, ease: "easeOut" }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       onClick={handleCardClick}
       className="card-glow rounded-2xl p-6 group cursor-pointer relative overflow-hidden"
@@ -266,6 +279,7 @@ export default function Home() {
   const { scrollYProgress } = useScroll();
   const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const { t } = useLang();
+  const isMounted = useIsMounted();
 
   const line1 = useTypingEffect("$ whoami", 60, 500);
   const line2 = useTypingEffect(t.hero.terminal.line2, 30, 1800);
@@ -310,7 +324,7 @@ export default function Home() {
             <HeroControls />
             <motion.button
               onClick={() => setIntroComplete(true)}
-              initial={{ opacity: 0 }}
+              initial={isMounted ? { opacity: 0 } : false}
               animate={{ opacity: 1 }}
               transition={{ delay: 2 }}
               className="absolute bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg text-xs text-muted/60 hover:text-foreground border border-border/30 hover:border-primary/40 hover:bg-primary/5 transition-all font-mono tracking-wider"
@@ -318,7 +332,7 @@ export default function Home() {
               skip intro &rarr;
             </motion.button>
             <div className="max-w-3xl w-full">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+              <motion.div initial={isMounted ? { opacity: 0, y: 20 } : false} animate={{ opacity: 1, y: 0 }}>
                 <div className="rounded-xl overflow-hidden border border-border/50 bg-surface/80 backdrop-blur-sm">
                   <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border/30">
                     <div className="flex gap-1.5">
@@ -333,7 +347,7 @@ export default function Home() {
                     {line1.done && <div className="text-foreground/80">{line2.displayed}{!line2.done && <span className="terminal-cursor" />}</div>}
                     {line2.done && (<><div className="h-2" /><div className="text-green">{line3.displayed}{!line3.done && <span className="terminal-cursor" />}</div></>)}
                     {line3.done && (
-                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-muted text-xs mt-2 leading-relaxed space-y-1">
+                      <motion.div initial={isMounted ? { opacity: 0 } : false} animate={{ opacity: 1 }} className="text-muted text-xs mt-2 leading-relaxed space-y-1">
                         {t.hero.terminal.journey.map((line, i) => (
                           <p key={i}><RichText text={line} /></p>
                         ))}
@@ -359,8 +373,8 @@ export default function Home() {
 
         <div className="max-w-3xl w-full">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={introHidden ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+            initial={isMounted ? { opacity: 0, scale: 0.95 } : false}
+            animate={introHidden ? { opacity: 1, scale: 1 } : (isMounted ? { opacity: 0, scale: 0.95 } : { opacity: 1, scale: 1 })}
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="text-center"
           >
@@ -402,7 +416,7 @@ export default function Home() {
 
       {/* ═══════ ABOUT ═══════ */}
       <Section id="about">
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+        <motion.div initial={isMounted ? { opacity: 0 } : false} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <span className="text-xs font-mono text-primary tracking-wider">{t.about.section}</span>
           <h2 className="text-3xl font-bold mt-2 mb-8">{t.about.howIGotHere}</h2>
           <div className="grid md:grid-cols-2 gap-12">
@@ -468,7 +482,7 @@ export default function Home() {
           const animClasses = ["orbit-ring-0", "orbit-ring-1", "orbit-ring-2", "orbit-ring-3"];
           return (
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={isMounted ? { opacity: 0, scale: 0.9 } : false}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -525,7 +539,7 @@ export default function Home() {
             </motion.div>
           );
         })()}
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-6 p-5 rounded-xl glass border border-primary/10">
+        <motion.div initial={isMounted ? { opacity: 0 } : false} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-6 p-5 rounded-xl glass border border-primary/10">
           <span className="text-xs font-mono text-primary">{t.tech.aiNative.title}</span>
           <p className="text-sm text-muted mt-2">{t.tech.aiNative.desc}</p>
         </motion.div>
