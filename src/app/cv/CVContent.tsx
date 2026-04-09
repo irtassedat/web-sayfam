@@ -75,6 +75,7 @@ const t = {
 
 export default function CVContent() {
   const [lang, setLang] = useState<"en" | "tr">("en");
+  const [photoOpen, setPhotoOpen] = useState(false);
   const c = t[lang];
 
   return (
@@ -97,16 +98,21 @@ export default function CVContent() {
         {/* ══════════ HEADER ══════════ */}
         <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-sky-900 text-white px-7 pt-5 pb-3.5 print:px-7 print:pt-4 print:pb-3">
           <div className="flex items-center gap-4">
-            <div className="shrink-0 relative">
+            <button
+              type="button"
+              onClick={() => setPhotoOpen(true)}
+              aria-label="View full photo"
+              className="shrink-0 relative cursor-pointer print:cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 rounded-full transition-transform hover:scale-105 print:hover:scale-100"
+            >
               <img
-                src="https://github.com/irtassedat.png"
+                src="/profile.png"
                 alt="Sedat İrtaş"
                 className="w-[68px] h-[68px] rounded-full border-[3px] border-sky-400/60 object-cover print:w-[62px] print:h-[62px]"
               />
               <div className="absolute -bottom-0.5 -right-0.5 w-4.5 h-4.5 bg-emerald-500 rounded-full border-2 border-slate-900 flex items-center justify-center">
                 <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
               </div>
-            </div>
+            </button>
             <div className="flex-1 min-w-0">
               <h1 className="text-[21px] font-bold tracking-tight leading-tight">Ebrar Sedat İrtaş</h1>
               <p className="text-sky-300 text-[12px] font-semibold mt-0.5">Full-Stack Developer</p>
@@ -339,6 +345,32 @@ export default function CVContent() {
           html, body { width: 210mm; height: 297mm; }
         }
       `}</style>
+
+      {/* ══════════ PHOTO LIGHTBOX ══════════ */}
+      {photoOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Sedat İrtaş — full photo"
+          onClick={() => setPhotoOpen(false)}
+          className="print:hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+        >
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setPhotoOpen(false)}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+          <img
+            src="/profile.png"
+            alt="Sedat İrtaş"
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-[90vw] max-h-[90vh] rounded-2xl shadow-2xl object-contain cursor-default"
+          />
+        </div>
+      )}
     </div>
   );
 }
